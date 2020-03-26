@@ -1,0 +1,52 @@
+<h1>Listado de pepsico</h1>
+
+<p *ngIf="!pepsicoList"><em>Loading...</em></p>
+
+<table datatable [dtOptions]="dtOptions" class="row-border hover" style="width:100%" *ngIf="pepsicoList">
+    <thead>
+      <tr>
+        <th>Folio</th>
+        <th>CEDIS</th>
+        <th>Región CEDIS</th>
+        <th>Gamesa/Sabritas</th>
+        <th>Nombre Cliente</th>
+        <th>Cerrado el</th>
+        <th>Tipo Instalación</th>
+        <th>Empresa Técnico</th>
+        <th>Técnico</th>
+        <th>Ecónomico</th>
+        <th>Placa</th>
+        <th>VIN</th>
+        <th>No. Serie Go</th>
+        <th>Fecha Inicial</th>
+        <th>Fecha Final</th>
+        <th>Fecha Cierre</th>
+        <th>Tiempo Hasta Cierre</th>
+        <th>Duplicado</th>
+        <th>No. Serie Suntech</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pepsico of pepsicoList">
+        <td>{{ pepsico.folio }}</td>
+        <td>{{ pepsico.cedis }}</td>
+        <td>{{ pepsico.region_cedis }}</td>
+        <td>{{ pepsico.gamesa_sabritas }}</td>
+        <td>{{ pepsico.nombre_cliente }}</td>
+        <td>{{ pepsico.cerrado_el }}</td>
+        <td>{{ pepsico.tipo_instalacion }}</td>
+        <td>{{ pepsico.empresa_tecnico }}</td>
+        <td>{{ pepsico.tecnico }}</td>
+        <td>{{ pepsico.economico }}</td>
+        <td>{{ pepsico.placa }}</td>
+        <td>{{ pepsico.vin }}</td>
+        <td>{{ pepsico.num_seriego }}</td>
+        <td>{{ pepsico.fecha_inicio }}</td>
+        <td>{{ pepsico.fecha_final }}</td>
+        <td>{{ pepsico.fecha_cierre }}</td>
+        <td>{{ pepsico.tiempo_cierre }}</td>
+        <td>{{ pepsico.duplicado }}</td>
+        <td>{{ pepsico.num_seriesuntech }}</td>
+      </tr>
+    </tbody>
+</table>

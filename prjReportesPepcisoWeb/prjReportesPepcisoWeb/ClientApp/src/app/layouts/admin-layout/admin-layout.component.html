@@ -1,0 +1,46 @@
+
+<div *ngIf="identity">
+    <div class="wrapper">
+        <div id="login">
+            <div class="header">
+                <h2 class="title">Login Checklists</h2>
+            </div>
+            <div class="content">
+                <form>
+                    <div class="form-group">
+                        <label style="font-weight: normal !important;">Nombre de usuario</label>
+                        <input type="text" class="form-control" placeholder="Usuario" />
+                    </div>
+                    <div class="form-group">
+                        <label style="font-weight: normal !important;">Contrase&ntilde;a</label>
+                        <input type="password" class="form-control" placeholder="Password"/>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-info btn-fill" (click)="isLogin()">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!identity">
+    <div class="wrapper">
+        <div class="sidebar" data-color="orange" data-image="">
+            <app-sidebar></app-sidebar>
+        </div>
+
+        <div class="main-panel">
+            <navbar-cmp></navbar-cmp>
+            <router-outlet></router-outlet>
+            <div *ngIf="isMap('maps')">
+                <!--<footer-cmp></footer-cmp>-->
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
