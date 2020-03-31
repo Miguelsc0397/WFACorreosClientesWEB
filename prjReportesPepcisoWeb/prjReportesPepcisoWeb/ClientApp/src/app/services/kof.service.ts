@@ -15,15 +15,6 @@ export class KOFService {
     this.myAppUrl = baseUrl + 'api/KOF/';
   }
 
-
-
-  //getKOF() {
-  //  return this._http.get(this.myAppUrl + 'Index').pipe(map(
-  //    response => {
-  //      return response;
-  //    }));
-  //}
-
   paramKOF(data: Data) {
     return this._http.post(this.myAppUrl + 'Index', data).pipe(map(
       response => {

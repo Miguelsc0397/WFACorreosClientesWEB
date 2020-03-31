@@ -17,6 +17,7 @@ export const ROUTES: RouteInfo[] = [
     // { path: '/notifications', title: 'Notifications',  icon:'pe-7s-bell', class: '' },
     { path: '/formularios', title: 'Formularios', icon:'pe-7s-next-2', class: '' },
     { path: '/iniciocheck', title: 'Checklist Azul', icon: 'pe-7s-check', class: '' },
+    { path: '/clientesfiltro', title: 'Clientes Con Filtro', icon: 'pe-7s-bell', class: '' }
     //{ path: '/login', title: 'Login', icon: 'pe-7s-check', class: '' }
     //{ path: '/upgrade', title: 'Upgrade to PRO',  icon:'pe-7s-rocket', class: 'active-pro' }
     

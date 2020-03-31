@@ -1,16 +1,16 @@
 ﻿using System;
-using prjReportesPepcisoWeb.Interfaces;
-using prjReportesPepcisoWeb.Models;
+using WFACorreosClientesWEB.Interfaces;
+using WFACorreosClientesWEB.Models;
 using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using prjReportesPepcisoWeb.utils;
+using WFACorreosClientesWEB.utils;
 using AutoMapper;
 using Microsoft.Extensions.Configuration;
 
-namespace prjReportesPepcisoWeb.service
+namespace WFACorreosClientesWEB.service
 {
     public class SqlPepsicoService : IPepsicoService
     {

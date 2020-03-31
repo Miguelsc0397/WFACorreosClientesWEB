@@ -1,6 +1,6 @@
 ﻿using System;
-using prjReportesPepcisoWeb.Interfaces;
-using prjReportesPepcisoWeb.Models;
+using WFACorreosClientesWEB.Interfaces;
+using WFACorreosClientesWEB.Models;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Web;
 using AutoMapper;
 
-namespace prjReportesPepcisoWeb.utils
+namespace WFACorreosClientesWEB.utils
 {
     public class SqlDatabaseUtil
     {

@@ -14,7 +14,6 @@ import { HeinekenInstalaciones } from '../../models/heineken_inst';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { ConfirmacionDialogoComponent } from '../confirmacion-dialogo/confirmacion-dialogo.component';
 
-
 @Component({
   selector: 'app-fetch-formularios',
   templateUrl: './fetch-formularios.component.html',
@@ -34,7 +33,7 @@ export class FetchFormulariosComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private _pepsicoService: PepsicoService,
     private excelService: ExporterService, private _kofService: KOFService,
       private _desinstalacionesService: HDesInstService, private _heinekenInstalacionesService: HeinekenInstService,
-      public dialog: MatDialog ) { }
+      public dialog: MatDialog) { }
 
     title = 'angulardatatables';
     dtOptions: DataTables.Settings = {};

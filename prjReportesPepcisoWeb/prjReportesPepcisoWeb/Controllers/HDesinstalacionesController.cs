@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using prjReportesPepcisoWeb.Interfaces;
-using prjReportesPepcisoWeb.Models;
+using WFACorreosClientesWEB.Interfaces;
+using WFACorreosClientesWEB.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace prjReportesPepcisoWeb.Controllers
+namespace WFACorreosClientesWEB.Controllers
 {
     [Route("api/[controller]")]
     public class HDesinstalacionesController : Controller

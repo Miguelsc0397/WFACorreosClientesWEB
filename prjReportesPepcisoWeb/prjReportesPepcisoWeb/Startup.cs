@@ -1,5 +1,5 @@
-using prjReportesPepcisoWeb.DataAccess;
-using prjReportesPepcisoWeb.Interfaces;
+using WFACorreosClientesWEB.DataAccess;
+using WFACorreosClientesWEB.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using prjReportesPepcisoWeb.service;
+using WFACorreosClientesWEB.service;
 using AutoMapper;
 
-namespace prjReportesPepcisoWeb
+namespace WFACorreosClientesWEB
 {
     public class Startup
     {
@@ -33,6 +33,7 @@ namespace prjReportesPepcisoWeb
             services.AddTransient<IHeineken_Desinstalaciones, HeinekenDesinDataAccessLayer>();
             services.AddTransient<IHeinekenInstalaciones, HeinekenInstDataAccessLayer>();
             services.AddTransient<IChecklistazul, ChecklistazulDataAccessLayer>();
+            services.AddTransient<IClientesFiltro, ClientesFiltroDataAccessLayer>();
             services.AddAutoMapper(typeof(Startup));
 
             services.AddMvc(options => options.EnableEndpointRouting = false);

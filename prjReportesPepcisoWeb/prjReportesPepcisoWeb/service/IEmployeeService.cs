@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using prjReportesPepcisoWeb.Models;
+using WFACorreosClientesWEB.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace prjReportesPepcisoWeb.service
+namespace WFACorreosClientesWEB.service
 {
     public interface IEmployeeService
     {

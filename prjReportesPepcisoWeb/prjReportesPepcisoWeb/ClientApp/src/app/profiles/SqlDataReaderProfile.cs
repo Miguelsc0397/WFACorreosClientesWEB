@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using AutoMapper;
-using prjReportesPepcisoWeb.Models;
+using WFACorreosClientesWEB.Models;
 
 
-namespace prjReportesPepcisoWeb.ClientApp.src.app.profiles
+namespace WFACorreosClientesWEB.ClientApp.src.app.profiles
 {
   public class SqlDataReaderProfile : Profile
   {

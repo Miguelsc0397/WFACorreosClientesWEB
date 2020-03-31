@@ -16,6 +16,7 @@ import { FetchChecklistazulComponent } from '../../fetch-checklistazul/fetch-che
 import { FetchFormulariosComponent } from '../../fetch-formularios/fetch-formularios.component';
 import { FetchInicioCheckComponent } from '../../fetch-iniciocheck/fetch-iniciocheck.component';
 import { LoginComponent } from '../../login/login.component';
+import { ClientesFiltroComponent } from '../../clientes-filtro/clientes-filtro.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'home',      component: HomeComponent },
@@ -34,5 +35,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'fetch-checklistazul', component: FetchChecklistazulComponent },
     { path: 'formularios', component: FetchFormulariosComponent },
     { path: 'iniciocheck', component: FetchInicioCheckComponent },
-    { path: 'login', component: LoginComponent }
+    { path: 'login', component: LoginComponent },
+    { path: 'clientesfiltro', component: ClientesFiltroComponent }
 ];

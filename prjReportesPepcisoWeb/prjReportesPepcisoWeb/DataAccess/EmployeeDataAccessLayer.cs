@@ -1,5 +1,5 @@
-﻿using prjReportesPepcisoWeb.Interfaces;
-using prjReportesPepcisoWeb.Models;
+﻿using WFACorreosClientesWEB.Interfaces;
+using WFACorreosClientesWEB.Models;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace prjReportesPepcisoWeb.DataAccess
+namespace WFACorreosClientesWEB.DataAccess
 {
     public class EmployeeDataAccessLayer : IEmployee
     {

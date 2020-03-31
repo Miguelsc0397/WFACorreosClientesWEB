@@ -1,10 +1,10 @@
-﻿using prjReportesPepcisoWeb.Models;
+﻿using WFACorreosClientesWEB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace prjReportesPepcisoWeb.Interfaces
+namespace WFACorreosClientesWEB.Interfaces
 {
     public interface IHeinekenInstalaciones
     {
