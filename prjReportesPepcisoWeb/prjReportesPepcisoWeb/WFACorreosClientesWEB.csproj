@@ -32,6 +32,7 @@
     <None Remove="ClientApp\src\app\material\material.module.ts" />
     <None Remove="ClientApp\src\models\checklistazul.ts" />
     <None Remove="ClientApp\src\models\clientesfiltro.ts" />
+    <None Remove="ClientApp\src\models\datacorreo.ts" />
     <None Remove="ClientApp\src\models\datafiltro.ts" />
     <None Remove="ClientApp\src\models\heineken_desinst.ts" />
     <None Remove="ClientApp\src\models\heineken_inst.ts" />
@@ -44,6 +45,9 @@
     <TypeScriptCompile Include="ClientApp\src\app\material\material.module.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\checklistazul.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\clientesfiltro.ts" />
+    <TypeScriptCompile Include="ClientApp\src\models\datacorreo.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\models\datafiltro.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\heineken_desinst.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\heineken_inst.ts" />

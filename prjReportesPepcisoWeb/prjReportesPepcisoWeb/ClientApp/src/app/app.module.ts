@@ -14,6 +14,8 @@ import { ConfirmacionDialogoComponent } from './confirmacion-dialogo/confirmacio
 import { AppComponent } from './app.component';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { ConfirmacionEditComponent } from './confirmacion-edit/confirmacion-edit.component';
+import { ComplementoPagoComponent } from './complemento-pago/complemento-pago.component';
 
 @NgModule({
     imports: [
@@ -31,10 +33,12 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     declarations: [
         AppComponent,
         AdminLayoutComponent,
-        ConfirmacionDialogoComponent
+        ConfirmacionDialogoComponent,
+        ConfirmacionEditComponent,
+        ComplementoPagoComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
-    entryComponents: [ConfirmacionDialogoComponent],
+    entryComponents: [ConfirmacionDialogoComponent, ConfirmacionEditComponent],
 })
 export class AppModule { }

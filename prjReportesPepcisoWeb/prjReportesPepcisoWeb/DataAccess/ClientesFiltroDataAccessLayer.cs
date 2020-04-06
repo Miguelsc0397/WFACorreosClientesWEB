@@ -13,6 +13,9 @@ namespace WFACorreosClientesWEB.DataAccess
     public class ClientesFiltroDataAccessLayer : IClientesFiltro
     {
         private string connectionString;
+        string clave = "";
+        string correos = "";
+        bool pagos = false;
         public ClientesFiltroDataAccessLayer(IConfiguration configuration)
         {
             connectionString = configuration["ConnectionStrings:CorreosConnection"];
@@ -30,7 +33,7 @@ namespace WFACorreosClientesWEB.DataAccess
                     SqlCommand cmd = new SqlCommand("Facturacion.spu_ConClientesFiltro", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@bitPagoAnt", SqlDbType.Bit).Value = datafiltro.Pagosanticipados == true ? 1 : 0;
+                    cmd.Parameters.AddWithValue("@bitPagoAnt", SqlDbType.Bit).Value = datafiltro.Pagosanticipados == true ? 0 : 1;
                     cmd.Parameters.AddWithValue("@sLike", SqlDbType.VarChar).Value = datafiltro.Filtro.ToString();
 
                     con.Open();
@@ -59,7 +62,6 @@ namespace WFACorreosClientesWEB.DataAccess
             }
 
         }
-
 
 
         public IEnumerable<ClientesFiltro> GetClientesFiltrosNull()
@@ -102,6 +104,46 @@ namespace WFACorreosClientesWEB.DataAccess
                 throw;
             }
 
+        }
+
+        public int updateClientesCorreos(DataCorreo datacorreo)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+
+                    clave = datacorreo.Numerocliente.Trim();
+                    correos = datacorreo.Correosnuevos.Trim();
+                    //if(datacorreo.Pagos == "SI")
+                    //{
+                    //    pagos = true;
+                    //}
+                    //else
+                    //{
+                    //    pagos = false;
+                    //}
+
+                    SqlCommand cmd = new SqlCommand("Facturacion.spu_ActCorreosCliente", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@claveCliente", datacorreo.Numerocliente);
+                    cmd.Parameters.AddWithValue("@correosCliente", datacorreo.Correosnuevos);
+                    cmd.Parameters.AddWithValue("@pagoAnticipado", SqlDbType.Bit).Value = pagos == true ? 1 : 0;
+                    cmd.Parameters.AddWithValue("@usuario", SqlDbType.VarChar).Value = "SISTEMAS";
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+                return 1;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
     }
 }

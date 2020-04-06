@@ -31,5 +31,13 @@ namespace WFACorreosClientesWEB.Controllers
         {
             return objcliente.GetClientesFiltrosNull();
         }
+
+        [HttpPost]
+        [Route("Edit")]
+        public int Edit([FromBody] DataCorreo datacorreo)
+        {
+            return objcliente.updateClientesCorreos(datacorreo);
+        }
+
     }
 }

@@ -11,5 +11,7 @@ namespace WFACorreosClientesWEB.Interfaces
         IEnumerable<ClientesFiltro> GetClientesFiltros(DataFiltro datafiltro);
 
         IEnumerable<ClientesFiltro> GetClientesFiltrosNull();
+
+        int updateClientesCorreos(DataCorreo datacorreo);
     }
 }
