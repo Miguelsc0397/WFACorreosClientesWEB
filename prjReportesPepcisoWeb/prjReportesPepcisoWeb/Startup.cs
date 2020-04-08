@@ -34,6 +34,8 @@ namespace WFACorreosClientesWEB
             services.AddTransient<IHeinekenInstalaciones, HeinekenInstDataAccessLayer>();
             services.AddTransient<IChecklistazul, ChecklistazulDataAccessLayer>();
             services.AddTransient<IClientesFiltro, ClientesFiltroDataAccessLayer>();
+            services.AddTransient<IClientesRFC, ClientesRFCDataAccessLayer>();
+            services.AddTransient<IFacturasRFC, FacturasRFCDataAccessLayer>();
             services.AddAutoMapper(typeof(Startup));
 
             services.AddMvc(options => options.EnableEndpointRouting = false);

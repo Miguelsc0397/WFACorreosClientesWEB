@@ -1,0 +1,109 @@
+<!--<h1 mat-dialog-title>Hi {{data.numerocliente}}</h1>
+
+<div mat-dialog-content>
+
+    <form role="form" [formGroup]="editProfileForm">
+
+        <h3>Clientes</h3>
+
+            <mat-form-field>
+                <input matInput [(ngModel)]="data.numerocliente" type="text"  formControlName="numerocliente" >
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput [(ngModel)]="data.nombrecliente" type="text"  formControlName="nombrecliente" >
+            </mat-form-field>
+
+            <mat-label>Correos Actuales</mat-label>
+            <mat-form-field>
+                <textarea matInput [(ngModel)]="data.correosactuales" rows="5"  formControlName="correosactuales" ></textarea>
+            </mat-form-field>
+
+            <mat-label>Correos Nuevos</mat-label>
+            <mat-form-field>
+                <textarea matInput [(ngModel)]="data.correosnuevos" rows="5" formControlName="correosnuevos" ></textarea>
+            </mat-form-field>
+
+            <mat-checkbox [(ngModel)]="data.pagos" formControlName="pagos">Pagos Anticipados</mat-checkbox>
+
+    </form>
+
+ </div>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No</button>
+    <button mat-button [mat-dialog-close]="true">Si</button>
+</div>-->
+
+
+<!--<h1 mat-dialog-title>Hi {{data.numerocliente}}</h1>
+<div mat-dialog-content>
+    <p>What's your favorite animal?</p>
+    <mat-form-field>
+        <mat-label>Favorite Animal</mat-label>
+        <input matInput [(ngModel)]="data.nombrecliente">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+</div>-->
+
+    <div class="modal-body">
+        <div class="content">
+            <form role="form" [formGroup]="editProfileForm">
+                <fieldset>
+                    <legend>Cliente</legend>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <!--<input type="text" class="form-control"  formControlName="numerocliente" id="numerocliente">-->
+                                <input matInput [(ngModel)]="data.numerocliente" class="form-control" readonly formControlName="numerocliente">
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input matInput [(ngModel)]="data.nombrecliente" class="form-control" readonly formControlName="nombrecliente">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >Correos Actuales</label>
+                            <textarea matInput [(ngModel)]="data.correosactuales" rows="5" class="form-control" readonly formControlName="correosactuales"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label >Correos Nuevos</label>
+                            <textarea matInput [(ngModel)]="data.correosnuevos" rows="5" class="form-control" formControlName="correosnuevos" [ngClass]="{ 'is-invalid': submitted && g.correosnuevos.errors }" ></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                <mat-checkbox  [(ngModel)]="data.pagos" formControlName="pagos">Pagos Anticipados</mat-checkbox>
+                    <!--<input matInput [(ngModel)]="data.pagos" type="checkbox" class="form-check-input" formControlName="pagos" />
+                    <label style="font-weight: normal !important;">Pagos Anticipados</label>-->
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <div class="row">
+            <div class="col-md-6" style="text-align: left;">
+                <button mat-button class="btn btn-success" (click)="onEnviar()">Aplicar</button>
+            </div>
+            <div class="col-md-6">
+                <button mat-button class="btn btn-danger" [mat-dialog-close]="data">Close</button>
+            </div>
+        </div>
+    </div>

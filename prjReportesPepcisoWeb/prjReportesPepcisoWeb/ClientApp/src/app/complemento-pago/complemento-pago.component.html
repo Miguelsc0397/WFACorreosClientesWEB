@@ -1,3 +1,90 @@
-<p>
-  complemento-pago works!
-</p>
+<div class="container-fluid">
+    <br />
+    <form class="form-inline" role="form" [formGroup]="facturaForm">
+        <div style="text-align: left;">
+            <div class="form-group">
+                <label style="font-weight: normal !important;">Clientes</label>&nbsp;
+                <select class="form-control" formControlName="opcion">
+                    <option *ngFor="let pagos of rfcList" [value]="pagos.rfc"> {{ pagos.cliente }} </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-info btn-fill" (click)="onSubmit()">Aceptar</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-plain">
+                <div class="content table-responsive table-full-width">
+                    <table datatable [dtOptions]="dtOptions" class="row-border hover" style="width:100%" *ngIf="facturaList">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Nombre</th>
+                                <th>Factura</th>
+                                <th>Divisi&oacute;n</th>
+                                <th>UUID</th>
+                                <th>Total</th>
+                                <th>Moneda</th>
+                                <th>Fecha Factura</th>
+                                <th>Hora Factura</th>
+                                <th>Folio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let factura of facturaList">
+                                <td>{{ factura.cliente }}</td>
+                                <td>{{ factura.nombre }}</td>
+                                <td>{{ factura.factura }}</td>
+                                <td>{{ factura.division }}</td>
+                                <td>{{ factura.uuid }}</td>
+                                <td>{{ factura.total }}</td>
+                                <td>{{ factura.moneda }}</td>
+                                <td>{{ factura.fecha_factura }}</td>
+                                <td>{{ factura.hora_factura }}</td>
+                                <td>{{ factura.folio }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">EDITA CORREOS</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <!--Hi : <span class="username"></span>-->
+                <div class="content">
+                    <p>No se mostraron facturas del cliente seleccionado</p>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

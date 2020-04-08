@@ -1,69 +1,69 @@
 
-<div class="container-fluid">
-    <br />
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card card-plain">
-                <div class="content table-responsive table-full-width">
-                    <!--Data table Clientes Filtro-->
-                    <table id="example" datatable [dtOptions]="dtOptions" class="row-border hover" style="width:100%" *ngIf="filtroList">
-                        <thead>
-                            <tr>
-                                <th>Clave Cliente</th>
-                                <th>Nombre Cliente</th>
-                                <th>Pagos Anticipados</th>
-                                <th>Correos Cliente</th>
-                                <th>Correo Reseller</th>
-                                <!--<th>Detalles</th>-->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let clientes of filtroList">
-                                <td>{{ clientes.clave_cliente }}</td>
-                                <td>{{ clientes.nombre_cliente }}</td>
-                                <td>{{ clientes.pagos_anticipados }}</td>
-                                <td>{{ clientes.correos_cliente }}</td>
-                                <td>{{ clientes.correo_reseller }}</td>
-                                <!--<td><button class="getDetails">Details</button></td>-->
-                            </tr>
-                        </tbody>
-                    </table>
+    <div class="container-fluid">
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="content table-responsive table-full-width">
+                        <!--Data table Clientes Filtro-->
+                        <table id="example" datatable [dtOptions]="dtOptions" class="row-border hover" style="width:100%" *ngIf="filtroList">
+                            <thead>
+                                <tr>
+                                    <th>Clave Cliente</th>
+                                    <th>Nombre Cliente</th>
+                                    <th>Pagos Anticipados</th>
+                                    <th>Correos Cliente</th>
+                                    <th>Correo Reseller</th>
+                                    <!--<th>Detalles</th>-->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let clientes of filtroList">
+                                    <td>{{ clientes.clave_cliente }}</td>
+                                    <td>{{ clientes.nombre_cliente }}</td>
+                                    <td>{{ clientes.pagos_anticipados }}</td>
+                                    <td>{{ clientes.correos_cliente }}</td>
+                                    <td>{{ clientes.correo_reseller }}</td>
+                                    <!--<td><button class="getDetails">Details</button></td>-->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
+
+            <form class="form-inline" style="text-align:left;" role="form" [formGroup]="filtroForm">
+
+                <!--<div class="form-group two-fields">
+                <div class="form-group">
+                    <label style="font-weight: normal !important;">Filtro</label>&nbsp;&nbsp;
+                    <input type="text" class="form-control" formControlName="filtro" placeholder="Nombre:">&nbsp;
+                </div>
+            </div>-->
+
+                <div class="form-group">
+                    <input type="checkbox" class="form-check-input" (click)="onSubmit()" formControlName="pagosanticipados" />
+                    <label style="font-weight: normal !important;">Mostrar solo clientes de pagos anticipados</label>&nbsp;
+                </div>
+
+            </form>
     </div>
 
-    <form class="form-inline" style="text-align:left;" role="form" [formGroup]="filtroForm">
-
-        <!--<div class="form-group two-fields">
-            <div class="form-group">
-                <label style="font-weight: normal !important;">Filtro</label>&nbsp;&nbsp;
-                <input type="text" class="form-control" formControlName="filtro" placeholder="Nombre:">&nbsp;
-            </div>
-        </div>-->
-
-        <div class="form-group">
-            <input type="checkbox" class="form-check-input" (click)="onSubmit()" formControlName="pagosanticipados" />
-            <label style="font-weight: normal !important;">Mostrar solo clientes de pagos anticipados</label>&nbsp;
-        </div>
-
-    </form>
-</div>
-
-<!-- The Modal -->
+ <!--The Modal 
 <div class="modal" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
 
-            <!-- Modal Header -->
+             Modal Header 
             <div class="modal-header">
                 <h4 class="modal-title">EDITA CORREOS</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
-            <!-- Modal body -->
+             Modal body 
             <div class="modal-body">
-                <!--Hi : <span class="username"></span>-->
+                Hi : <span class="username"></span>
                 <div class="content">
                     <form role="form" [formGroup]="editProfileForm">
                         <fieldset>
@@ -95,7 +95,10 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label style="font-weight: normal !important;">Correos Nuevos</label>
-                                    <textarea rows="5" class="form-control" formControlName="correosnuevos" id="correos2"></textarea>
+                                    <textarea rows="5" class="form-control" formControlName="correosnuevos" [ngClass]="{ 'is-invalid': submitted && g.correosnuevos.errors }" id="correos2"></textarea>
+                                    <div class="invalid-feedback" *ngIf="submitted && g.correosnuevos.errors">
+                                        <div *ngIf="g.correosnuevos.errors.required">Last Name is required</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +112,7 @@
                 </div>
             </div>
 
-            <!-- Modal footer -->
+             Modal footer 
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-md-6" style="text-align: left;">
@@ -123,6 +126,6 @@
 
         </div>
     </div>
-</div>
+</div>-->
 
 

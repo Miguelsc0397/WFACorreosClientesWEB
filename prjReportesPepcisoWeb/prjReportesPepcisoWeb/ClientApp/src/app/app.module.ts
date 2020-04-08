@@ -15,7 +15,8 @@ import { AppComponent } from './app.component';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { ConfirmacionEditComponent } from './confirmacion-edit/confirmacion-edit.component';
-import { ComplementoPagoComponent } from './complemento-pago/complemento-pago.component';
+import { ModalEditClientescorreosComponent } from './modal-edit-clientescorreos/modal-edit-clientescorreos.component';
+
 
 @NgModule({
     imports: [
@@ -35,10 +36,10 @@ import { ComplementoPagoComponent } from './complemento-pago/complemento-pago.co
         AdminLayoutComponent,
         ConfirmacionDialogoComponent,
         ConfirmacionEditComponent,
-        ComplementoPagoComponent
+        ModalEditClientescorreosComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
-    entryComponents: [ConfirmacionDialogoComponent, ConfirmacionEditComponent],
+    entryComponents: [ConfirmacionDialogoComponent, ConfirmacionEditComponent, ModalEditClientescorreosComponent],
 })
 export class AppModule { }

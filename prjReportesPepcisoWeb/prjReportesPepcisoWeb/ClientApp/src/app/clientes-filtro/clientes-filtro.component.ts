@@ -4,6 +4,8 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 import { ClientesFiltro } from '../../models/clientesfiltro';
 import { ClientesFiltroService } from '../services/clientesfiltro.service';
 import { ConfirmacionEditComponent } from '../confirmacion-edit/confirmacion-edit.component';
+import { ModalEditClientescorreosComponent } from '../modal-edit-clientescorreos/modal-edit-clientescorreos.component';
+import { ActivatedRoute, Router } from '@angular/router';
 declare var $: any
 
 @Component({
@@ -14,14 +16,15 @@ declare var $: any
 export class ClientesFiltroComponent implements OnInit {
 
     filtroForm: FormGroup;
-    editProfileForm: FormGroup;
+    
     submitted = false;
     public filtroList: ClientesFiltro[];
     public correosList: ClientesFiltro[];
+    public parametros: ClientesFiltro = new ClientesFiltro;
 
-    constructor(private formBuilder: FormBuilder, private _clientesService: ClientesFiltroService, public dialog: MatDialog) {
-        this._clientesService.paramFiltroNull().subscribe(
-            (data: ClientesFiltro[]) => this.filtroList = data);
+    constructor(private formBuilder: FormBuilder, private _clientesService: ClientesFiltroService, public dialog: MatDialog,
+        private _router: Router) {
+        
          }
 
     title = 'angulardatatables';
@@ -40,31 +43,61 @@ export class ClientesFiltroComponent implements OnInit {
     }
 
     someClickHandler(info: any): void {
-        $('#myModal').appendTo("body").modal('show');
-        this.editProfileForm.patchValue({
-            numerocliente: info[0],
-            nombrecliente: info[1],
-            pagos: info[2] != null && info[2] == "SI" ? true : false,
-            correosactuales: info[3],
-            correosnuevos: info[3]
-            
+        this.parametros.clave_cliente = info[0];
+
+        this._clientesService.consultgarRFC(this.parametros)
+            .subscribe((response: ClientesFiltro) => {
+                console.log(response);
+                //this.parametros = response;
+                this.show(response);
+            }, error => console.error(error));
+
+        
+
+    }
+
+    show(cliente: ClientesFiltro) {
+        const dialogRef = this.dialog.open(ModalEditClientescorreosComponent, {
+            width: '800px',
+            data: {
+                numerocliente: cliente.clave_cliente,
+                nombrecliente: cliente.nombre_cliente,
+                pagos: cliente.pagos_anticipados != null && cliente.pagos_anticipados == "SI" ? true : false,
+                correosactuales: cliente.correos_cliente,
+                correosnuevos: cliente.correos_cliente
+            }
         });
+
+
+        dialogRef.afterClosed().subscribe(res => {
+            console.log(res.data)
+     
+            if (res.data != null) {
+                this.filtroList = this.filtroList.filter((value, key) => {
+                    if (value.clave_cliente == res.data.numerocliente) {
+                        value.correos_cliente = res.data.correosnuevos;
+                        if (res.data.pagos == true) {
+                            value.pagos_anticipados = "SI";
+                        } else {
+                            value.pagos_anticipados = "";
+                        }
+                        
+                    }
+                    return true;
+                });
+            }
+            // received data from confirm-component
+        })
     }
     
     ngOnInit() {
 
+        this._clientesService.paramFiltroNull().subscribe(
+            (data: ClientesFiltro[]) => this.filtroList = data);
+
         this.filtroForm = this.formBuilder.group({
             filtro: [''],
             pagosanticipados: [false]
-        }, {
-        });
-
-        this.editProfileForm = this.formBuilder.group({
-            numerocliente: [''],
-            nombrecliente: [''],
-            correosactuales: [''],
-            correosnuevos: [''],
-            pagos: [false]
         }, {
         });
 
@@ -106,25 +139,14 @@ export class ClientesFiltroComponent implements OnInit {
 
 
     onSubmit() {
-        this.submitted = true;
+        //this.submitted = true;
 
-        this._clientesService.paramFiltro(this.filtroForm.value).subscribe(
-            (data: ClientesFiltro[]) => this.filtroList = data);
-
-        //this._clientesService.paramFiltroNull().subscribe(
+        //this._clientesService.paramFiltro(this.filtroForm.value).subscribe(
         //    (data: ClientesFiltro[]) => this.filtroList = data);
+
+      
     }
 
-    onEnviar() {
-
-        this._clientesService.updateClientesCorreos(this.editProfileForm.value)
-            .subscribe(() => {
-                $('#myModal').appendTo("body").modal('hide');
-                this._clientesService.paramFiltroNull().subscribe(
-                    (data: ClientesFiltro[]) => this.filtroList = data);
-            }, error => console.error(error));
-        
-    }
-
+    
     
 }

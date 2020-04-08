@@ -17,6 +17,7 @@ import { FetchFormulariosComponent } from '../../fetch-formularios/fetch-formula
 import { FetchInicioCheckComponent } from '../../fetch-iniciocheck/fetch-iniciocheck.component';
 import { LoginComponent } from '../../login/login.component';
 import { ClientesFiltroComponent } from '../../clientes-filtro/clientes-filtro.component';
+import { ComplementoPagoComponent } from '../../complemento-pago/complemento-pago.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'home',      component: HomeComponent },
@@ -36,5 +37,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'formularios', component: FetchFormulariosComponent },
     { path: 'iniciocheck', component: FetchInicioCheckComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'clientesfiltro', component: ClientesFiltroComponent }
+    { path: 'clientesfiltro', component: ClientesFiltroComponent },
+    { path: 'complementopago', component: ComplementoPagoComponent }
 ];

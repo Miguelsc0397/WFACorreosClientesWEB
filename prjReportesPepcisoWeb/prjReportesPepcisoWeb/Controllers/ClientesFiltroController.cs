@@ -39,5 +39,12 @@ namespace WFACorreosClientesWEB.Controllers
             return objcliente.updateClientesCorreos(datacorreo);
         }
 
+        [HttpPost]
+        [Route("Consultar")]
+        public ClientesFiltro Consultar([FromBody] ClientesFiltro parameter)
+        {
+            return objcliente.GetClientebyRFC(parameter);
+        }
+
     }
 }

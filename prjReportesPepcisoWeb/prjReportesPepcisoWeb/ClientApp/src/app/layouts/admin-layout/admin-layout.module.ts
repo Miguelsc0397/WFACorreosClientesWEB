@@ -28,6 +28,7 @@ import { FetchFormulariosComponent } from '../../fetch-formularios/fetch-formula
 import { FetchInicioCheckComponent } from '../../fetch-iniciocheck/fetch-iniciocheck.component';
 import { LoginComponent } from '../../login/login.component';
 import { ClientesFiltroComponent } from '../../clientes-filtro/clientes-filtro.component';
+import { ComplementoPagoComponent } from '../../complemento-pago/complemento-pago.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { ClientesFiltroComponent } from '../../clientes-filtro/clientes-filtro.c
     FetchFormulariosComponent,
     FetchInicioCheckComponent,
     LoginComponent,
-    ClientesFiltroComponent
+    ClientesFiltroComponent,
+    ComplementoPagoComponent
     ],
     providers: [ExporterService],
     exports: [RouterModule]

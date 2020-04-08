@@ -41,6 +41,13 @@ export class ClientesFiltroService {
                 }));
     }
 
+    consultgarRFC(parameter: ClientesFiltro) {
+        return this._http.post(this.myAppUrl + 'Consultar', parameter).pipe(map(
+            response => {
+                return response;
+            }));
+}
+
     //getClientes() {
     //  return this._http.get(this.myAppUrl + 'Index').pipe(map(
     //    response => {

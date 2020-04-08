@@ -14,8 +14,7 @@ namespace WFACorreosClientesWEB.DataAccess
     {
         private string connectionString;
         string clave = "";
-        string correos = "";
-        bool pagos = false;
+        string correos = "";   
         public ClientesFiltroDataAccessLayer(IConfiguration configuration)
         {
             connectionString = configuration["ConnectionStrings:CorreosConnection"];
@@ -115,21 +114,13 @@ namespace WFACorreosClientesWEB.DataAccess
 
                     clave = datacorreo.Numerocliente.Trim();
                     correos = datacorreo.Correosnuevos.Trim();
-                    //if(datacorreo.Pagos == "SI")
-                    //{
-                    //    pagos = true;
-                    //}
-                    //else
-                    //{
-                    //    pagos = false;
-                    //}
 
                     SqlCommand cmd = new SqlCommand("Facturacion.spu_ActCorreosCliente", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@claveCliente", datacorreo.Numerocliente);
                     cmd.Parameters.AddWithValue("@correosCliente", datacorreo.Correosnuevos);
-                    cmd.Parameters.AddWithValue("@pagoAnticipado", SqlDbType.Bit).Value = pagos == true ? 1 : 0;
+                    cmd.Parameters.AddWithValue("@pagoAnticipado", SqlDbType.Bit).Value = datacorreo.Pagos == true ? 1 : 0;
                     cmd.Parameters.AddWithValue("@usuario", SqlDbType.VarChar).Value = "SISTEMAS";
 
                     con.Open();
@@ -144,6 +135,48 @@ namespace WFACorreosClientesWEB.DataAccess
                 throw;
             }
             
+        }
+
+        public ClientesFiltro GetClientebyRFC(ClientesFiltro parameter)
+        {
+            try
+            {
+                List<ClientesFiltro> lstclientesfiltros = new List<ClientesFiltro>();
+
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+
+                    SqlCommand cmd = new SqlCommand("Facturacion.spu_ConClientesFiltro", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@bitPagoAnt", SqlDbType.Bit).Value = false;
+                    cmd.Parameters.AddWithValue("@sLike", SqlDbType.VarChar).Value = "";
+
+                    con.Open();
+                    SqlDataReader rdr = cmd.ExecuteReader();
+
+                    while (rdr.Read())
+                    {
+                        ClientesFiltro clientesfiltro = new ClientesFiltro();
+
+                        clientesfiltro.Clave_cliente = rdr["Clave Cliente"].ToString();
+                        clientesfiltro.Nombre_cliente = rdr["Nombre Cliente"].ToString();
+                        clientesfiltro.Pagos_anticipados = rdr["Pagos Anticipados"].ToString();
+                        clientesfiltro.Correos_cliente = rdr["Correos Cliente"].ToString();
+                        clientesfiltro.Correo_reseller = rdr["Correo Reseller"].ToString();
+
+                        lstclientesfiltros.Add(clientesfiltro);
+                    }
+                    con.Close();
+                }
+                return lstclientesfiltros.Where(x => x.Clave_cliente == parameter.Clave_cliente).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
     }
 }

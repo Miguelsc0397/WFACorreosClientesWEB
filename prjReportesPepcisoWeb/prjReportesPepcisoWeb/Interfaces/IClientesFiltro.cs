@@ -13,5 +13,7 @@ namespace WFACorreosClientesWEB.Interfaces
         IEnumerable<ClientesFiltro> GetClientesFiltrosNull();
 
         int updateClientesCorreos(DataCorreo datacorreo);
+        
+        ClientesFiltro GetClientebyRFC(ClientesFiltro clientesfiltro);
     }
 }
