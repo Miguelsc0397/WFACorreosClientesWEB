@@ -29,7 +29,7 @@ import { ModalEditClientescorreosComponent } from './modal-edit-clientescorreos/
         SidebarModule,
         ReactiveFormsModule,
         AppRoutingModule,
-        MaterialModule
+        MaterialModule      
     ],
     declarations: [
         AppComponent,

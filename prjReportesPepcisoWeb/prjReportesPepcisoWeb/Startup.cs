@@ -36,6 +36,7 @@ namespace WFACorreosClientesWEB
             services.AddTransient<IClientesFiltro, ClientesFiltroDataAccessLayer>();
             services.AddTransient<IClientesRFC, ClientesRFCDataAccessLayer>();
             services.AddTransient<IFacturasRFC, FacturasRFCDataAccessLayer>();
+            services.AddTransient<IUserLogin, UserLoginDataAccessLayer>();
             services.AddAutoMapper(typeof(Startup));
 
             services.AddMvc(options => options.EnableEndpointRouting = false);

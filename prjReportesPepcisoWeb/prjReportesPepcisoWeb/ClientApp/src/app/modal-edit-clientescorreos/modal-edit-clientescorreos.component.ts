@@ -61,8 +61,6 @@ export class ModalEditClientescorreosComponent implements OnInit {
 
         this._clientesService.updateClientesCorreos(this.editProfileForm.value)
             .subscribe(() => {
-                //this._router.navigate(['/clientesfiltro']);
-                //this.dialogRef.close();
 
                 this.dialogRef.close({ data: this.data }) // send data to parent component
             }, error => console.error(error));

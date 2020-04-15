@@ -15,12 +15,12 @@ import { FetchHDesinstComponent } from '../../fetch-heineken-desinst/fetch-hdesi
 import { FetchChecklistazulComponent } from '../../fetch-checklistazul/fetch-checklistazul.component';
 import { FetchFormulariosComponent } from '../../fetch-formularios/fetch-formularios.component';
 import { FetchInicioCheckComponent } from '../../fetch-iniciocheck/fetch-iniciocheck.component';
-import { LoginComponent } from '../../login/login.component';
 import { ClientesFiltroComponent } from '../../clientes-filtro/clientes-filtro.component';
 import { ComplementoPagoComponent } from '../../complemento-pago/complemento-pago.component';
+import { AuthGaurdService } from '../../services/auth-gaurd.service';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'home',      component: HomeComponent },
+    { path: 'home', component: HomeComponent},
     { path: 'user',           component: UserComponent },
     { path: 'table',          component: TablesComponent },
     { path: 'typography',     component: TypographyComponent },
@@ -36,7 +36,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'fetch-checklistazul', component: FetchChecklistazulComponent },
     { path: 'formularios', component: FetchFormulariosComponent },
     { path: 'iniciocheck', component: FetchInicioCheckComponent },
-    { path: 'login', component: LoginComponent },
     { path: 'clientesfiltro', component: ClientesFiltroComponent },
     { path: 'complementopago', component: ComplementoPagoComponent }
 ];

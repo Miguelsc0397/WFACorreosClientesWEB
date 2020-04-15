@@ -1,7 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-//import { Employee } from '../../models/employee';
 import { UserLogin } from 'models/userlogin';
 
 @Injectable({
@@ -15,5 +14,12 @@ export class UserLoginService {
     this.myAppUrl = baseUrl + 'api/UserLogin/';
   }
 
+    paramLogin(userlogin: UserLogin) {
+        return this._http.post(this.myAppUrl + 'Login', userlogin).pipe(map(
+            response => {
+                return response;
+            }));
+    }
   
 }
+

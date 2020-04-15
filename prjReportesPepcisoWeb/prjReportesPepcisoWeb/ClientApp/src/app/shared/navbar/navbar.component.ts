@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../../sidebar/sidebar.component';
-import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
     // moduleId: module.id,
@@ -15,7 +16,7 @@ export class NavbarComponent implements OnInit{
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(location: Location,  private element: ElementRef) {
+    constructor(location: Location, private element: ElementRef, private loginservice: AuthenticationService) {
       this.location = location;
           this.sidebarVisible = false;
     }
@@ -63,5 +64,9 @@ export class NavbarComponent implements OnInit{
           }
       }
       return 'Home';
+    }
+
+    salir() {
+        this.loginservice.logOut();
     }
 }

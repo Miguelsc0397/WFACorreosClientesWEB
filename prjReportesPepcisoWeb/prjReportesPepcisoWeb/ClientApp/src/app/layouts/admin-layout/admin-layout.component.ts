@@ -1,11 +1,16 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy, PopStateEvent } from '@angular/common';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import 'rxjs/add/operator/filter';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import PerfectScrollbar from 'perfect-scrollbar';
+import { UserLogin } from 'models/userlogin';
+import { UserLoginService } from '../../services/userlogin.service';
 import { Observable } from 'rxjs';
+import { NotifierService } from 'angular-notifier';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -17,10 +22,30 @@ export class AdminLayoutComponent implements OnInit {
   private lastPoppedUrl: string;
     private yScrollStack: number[] = [];
     public identity: boolean = true;
+    private notifier: NotifierService;
+    public loginForm: FormGroup;
+    submitted = false;
+    invalidLogin = false;
 
-  constructor( public location: Location, private router: Router) {}
+    constructor(public location: Location, private router: Router, private formBuilder: FormBuilder,
+        private loginservice: AuthenticationService) {
+        //this.loginservice.isUserLoggedIn;
+    }
 
     ngOnInit() {
+        let result = this.loginservice.isUserLoggedIn();
+
+        if (result) {
+            this.identity = false;
+        } else {
+            this.identity = true;
+        }
+
+        this.loginForm = this.formBuilder.group({
+            usuario: ['', Validators.required],
+            password: ['', Validators.required]
+        }, {
+        });
 
     console.log(this.router)
       const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
@@ -58,7 +83,10 @@ export class AdminLayoutComponent implements OnInit {
           let ps = new PerfectScrollbar(elemMainPanel);
           ps = new PerfectScrollbar(elemSidebar);
       }
-  }
+    }
+
+    get f() { return this.loginForm.controls; }
+
   ngAfterViewInit() {
       this.runOnRouteChange();
   }
@@ -88,7 +116,27 @@ export class AdminLayoutComponent implements OnInit {
   }
 
     isLogin() {
-        this.identity = false;
+        this.submitted = true;
+
+        if (this.loginForm.invalid) {
+            return;
+        }
+
+
+        this.loginservice.authenticate(this.loginForm.value)
+            .subscribe((data: number) => {
+                if (data == 1) {
+                    //this.loginservice.authenticate(this.f.usuario.value, this.f.password.value)
+                    //alert("llego aqui");
+                    this.identity = false;
+                    this.invalidLogin = false;
+                } else {
+                    //alert("llego aqui por ser 0");
+                    this.invalidLogin = true;
+                }
+            }, error => console.error(error));
+
+        
     }
 
 }

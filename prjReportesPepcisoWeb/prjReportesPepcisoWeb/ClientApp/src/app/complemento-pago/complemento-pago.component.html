@@ -6,22 +6,30 @@
                 <label style="font-weight: normal !important;">Clientes</label>&nbsp;
                 <select class="form-control" formControlName="opcion">
                     <option *ngFor="let pagos of rfcList" [value]="pagos.rfc"> {{ pagos.cliente }} </option>
-                </select>
+                </select>&nbsp;
             </div>
 
             <div class="form-group">
-                <button class="btn btn-info btn-fill" (click)="onSubmit()">Aceptar</button>
+                <button class="btn btn-info btn-fill" (click)="onSubmit()">Buscar Facturas</button>
+
+                <!--<button class="btn btn-info btn-fill" (click)="showNotification('top','right')">Notificacion</button>-->
             </div>
         </div>
     </form>
+
+    <button class="btn btn-info btn-fill" (click)="rerender()">
+        Rerender
+    </button>
 
     <div class="row">
         <div class="col-md-12">
             <div class="card card-plain">
                 <div class="content table-responsive table-full-width">
-                    <table datatable [dtOptions]="dtOptions" class="row-border hover" style="width:100%" *ngIf="facturaList">
+                    <table id="example" datatable [dtOptions]="dtOptions" class="row-border hover" style="width:100%" *ngIf="facturaList">
+
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>Cliente</th>
                                 <th>Nombre</th>
                                 <th>Factura</th>
@@ -36,6 +44,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let factura of facturaList">
+                                <th><input type="checkbox"></th>
                                 <td>{{ factura.cliente }}</td>
                                 <td>{{ factura.nombre }}</td>
                                 <td>{{ factura.factura }}</td>

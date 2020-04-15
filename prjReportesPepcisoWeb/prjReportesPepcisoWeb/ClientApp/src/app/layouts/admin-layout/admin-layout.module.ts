@@ -26,9 +26,51 @@ import { FetchHDesinstComponent } from '../../fetch-heineken-desinst/fetch-hdesi
 import { FetchChecklistazulComponent } from '../../fetch-checklistazul/fetch-checklistazul.component';
 import { FetchFormulariosComponent } from '../../fetch-formularios/fetch-formularios.component';
 import { FetchInicioCheckComponent } from '../../fetch-iniciocheck/fetch-iniciocheck.component';
-import { LoginComponent } from '../../login/login.component';
 import { ClientesFiltroComponent } from '../../clientes-filtro/clientes-filtro.component';
 import { ComplementoPagoComponent } from '../../complemento-pago/complemento-pago.component';
+import { NotifierModule, NotifierOptions } from "angular-notifier";
+//import { LoginComponent } from '../../login/login.component';
+
+const customNotifierOptions: NotifierOptions = {
+    position: {
+        horizontal: {
+            position: 'right',
+            distance: 12
+        },
+        vertical: {
+            position: 'top',
+            distance: 12,
+            gap: 10
+        }
+    },
+    theme: 'material',
+    behaviour: {
+        autoHide: 5000,
+        onClick: 'hide',
+        onMouseover: 'pauseAutoHide',
+        showDismissButton: true,
+        stacking: 4
+    },
+    animations: {
+        enabled: true,
+        show: {
+            preset: 'slide',
+            speed: 300,
+            easing: 'ease'
+        },
+        hide: {
+            preset: 'fade',
+            speed: 300,
+            easing: 'ease',
+            offset: 50
+        },
+        shift: {
+            speed: 300,
+            easing: 'ease'
+        },
+        overlap: 150
+    }
+};
 
 
 @NgModule({
@@ -40,6 +82,7 @@ import { ComplementoPagoComponent } from '../../complemento-pago/complemento-pag
     ReactiveFormsModule,
     DataTablesModule,
     NguiMapModule.forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE' }),
+    NotifierModule.withConfig(customNotifierOptions)
   ],
   declarations: [
     HomeComponent,
@@ -57,9 +100,9 @@ import { ComplementoPagoComponent } from '../../complemento-pago/complemento-pag
     FetchChecklistazulComponent,
     FetchFormulariosComponent,
     FetchInicioCheckComponent,
-    LoginComponent,
     ClientesFiltroComponent,
     ComplementoPagoComponent
+    //LoginComponent
     ],
     providers: [ExporterService],
     exports: [RouterModule]

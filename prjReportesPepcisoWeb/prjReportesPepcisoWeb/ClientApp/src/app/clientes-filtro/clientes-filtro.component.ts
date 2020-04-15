@@ -6,6 +6,7 @@ import { ClientesFiltroService } from '../services/clientesfiltro.service';
 import { ConfirmacionEditComponent } from '../confirmacion-edit/confirmacion-edit.component';
 import { ModalEditClientescorreosComponent } from '../modal-edit-clientescorreos/modal-edit-clientescorreos.component';
 import { ActivatedRoute, Router } from '@angular/router';
+
 declare var $: any
 
 @Component({
@@ -15,8 +16,8 @@ declare var $: any
 })
 export class ClientesFiltroComponent implements OnInit {
 
-    filtroForm: FormGroup;
     
+    filtroForm: FormGroup;
     submitted = false;
     public filtroList: ClientesFiltro[];
     public correosList: ClientesFiltro[];
@@ -29,6 +30,8 @@ export class ClientesFiltroComponent implements OnInit {
 
     title = 'angulardatatables';
     dtOptions: any = {};
+
+    
 
     openDialog(): void {
         const dialogref = this.dialog.open(ConfirmacionEditComponent, {
@@ -51,8 +54,6 @@ export class ClientesFiltroComponent implements OnInit {
                 //this.parametros = response;
                 this.show(response);
             }, error => console.error(error));
-
-        
 
     }
 

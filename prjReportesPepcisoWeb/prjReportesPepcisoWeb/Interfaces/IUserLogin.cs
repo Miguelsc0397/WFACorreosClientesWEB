@@ -8,6 +8,6 @@ namespace WFACorreosClientesWEB.Interfaces
 {
     public interface IUserLogin
     {
-        IEnumerable<UserLogin> GetLogin();
+        int GetLogin(UserLogin userlogin);
     }
 }
