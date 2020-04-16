@@ -16,6 +16,49 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { ConfirmacionEditComponent } from './confirmacion-edit/confirmacion-edit.component';
 import { ModalEditClientescorreosComponent } from './modal-edit-clientescorreos/modal-edit-clientescorreos.component';
+import { NotifierModule, NotifierOptions } from "angular-notifier";
+import { ConfirmacionLogoutComponent } from './confirmacion-logout/confirmacion-logout.component';
+
+const customNotifierOptions: NotifierOptions = {
+    position: {
+        horizontal: {
+            position: 'right',
+            distance: 12
+        },
+        vertical: {
+            position: 'top',
+            distance: 12,
+            gap: 10
+        }
+    },
+    theme: 'material',
+    behaviour: {
+        autoHide: 5000,
+        onClick: 'hide',
+        onMouseover: 'pauseAutoHide',
+        showDismissButton: true,
+        stacking: 4
+    },
+    animations: {
+        enabled: true,
+        show: {
+            preset: 'slide',
+            speed: 300,
+            easing: 'ease'
+        },
+        hide: {
+            preset: 'fade',
+            speed: 300,
+            easing: 'ease',
+            offset: 50
+        },
+        shift: {
+            speed: 300,
+            easing: 'ease'
+        },
+        overlap: 150
+    }
+};
 
 
 @NgModule({
@@ -29,17 +72,19 @@ import { ModalEditClientescorreosComponent } from './modal-edit-clientescorreos/
         SidebarModule,
         ReactiveFormsModule,
         AppRoutingModule,
-        MaterialModule      
+        MaterialModule,
+        NotifierModule.withConfig(customNotifierOptions)
     ],
     declarations: [
         AppComponent,
         AdminLayoutComponent,
         ConfirmacionDialogoComponent,
         ConfirmacionEditComponent,
-        ModalEditClientescorreosComponent
+        ModalEditClientescorreosComponent,
+        ConfirmacionLogoutComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
-    entryComponents: [ConfirmacionDialogoComponent, ConfirmacionEditComponent, ModalEditClientescorreosComponent],
+    entryComponents: [ConfirmacionDialogoComponent, ConfirmacionEditComponent, ModalEditClientescorreosComponent, ConfirmacionLogoutComponent]
 })
 export class AppModule { }

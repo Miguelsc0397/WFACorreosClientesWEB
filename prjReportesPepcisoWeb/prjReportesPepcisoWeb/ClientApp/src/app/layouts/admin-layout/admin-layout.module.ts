@@ -101,8 +101,7 @@ const customNotifierOptions: NotifierOptions = {
     FetchFormulariosComponent,
     FetchInicioCheckComponent,
     ClientesFiltroComponent,
-    ComplementoPagoComponent
-    //LoginComponent
+      ComplementoPagoComponent
     ],
     providers: [ExporterService],
     exports: [RouterModule]

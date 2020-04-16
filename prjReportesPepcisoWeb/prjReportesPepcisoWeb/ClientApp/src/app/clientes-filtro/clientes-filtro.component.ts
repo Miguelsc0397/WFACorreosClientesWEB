@@ -31,19 +31,17 @@ export class ClientesFiltroComponent implements OnInit {
     title = 'angulardatatables';
     dtOptions: any = {};
 
-    
+    //openDialog(): void {
+    //    const dialogref = this.dialog.open(ConfirmacionEditComponent, {
+    //        width: '270px',
+    //        //data: "Se limpiará el resultado de la consulta, ¿ desea continuar ?",
 
-    openDialog(): void {
-        const dialogref = this.dialog.open(ConfirmacionEditComponent, {
-            width: '270px',
-            //data: "Se limpiará el resultado de la consulta, ¿ desea continuar ?",
+    //    });
 
-        });
-
-        dialogref.afterClosed().subscribe(result => {
-            //this.onEnviar();
-        });
-    }
+    //    dialogref.afterClosed().subscribe(result => {
+    //        //this.onEnviar();
+    //    });
+    //}
 
     someClickHandler(info: any): void {
         this.parametros.clave_cliente = info[0];

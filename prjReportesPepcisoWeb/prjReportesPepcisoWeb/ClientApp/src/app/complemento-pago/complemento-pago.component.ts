@@ -98,15 +98,15 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
                     last: "&Uacute;ltimo",
 
                 }
-            },
-            rowCallback: (row: Node, data: any[] | Object, index: number) => {
-                const self = this;
-                $('td', row).unbind('selected');
-                $('td', row).bind('selected', () => {
-                    //self.someClickHandler(data);
-                });
-                return row;
             }
+            //rowCallback: (row: Node, data: any[] | Object, index: number) => {
+            //    const self = this;
+            //    $('td', row).unbind('selected');
+            //    $('td', row).bind('selected', () => {
+            //        //self.someClickHandler(data);
+            //    });
+            //    return row;
+            //}
         };
 
     }
@@ -127,7 +127,7 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
             }
             // This log is never executed even when the update is successful
         }, error => {
-            console.log('error while updating order');
+            console.log(error);
         });
     }
 

@@ -17,7 +17,6 @@ import { FetchFormulariosComponent } from '../../fetch-formularios/fetch-formula
 import { FetchInicioCheckComponent } from '../../fetch-iniciocheck/fetch-iniciocheck.component';
 import { ClientesFiltroComponent } from '../../clientes-filtro/clientes-filtro.component';
 import { ComplementoPagoComponent } from '../../complemento-pago/complemento-pago.component';
-import { AuthGaurdService } from '../../services/auth-gaurd.service';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'home', component: HomeComponent},

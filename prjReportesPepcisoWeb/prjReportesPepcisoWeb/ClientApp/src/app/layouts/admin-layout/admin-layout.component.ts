@@ -11,6 +11,7 @@ import { UserLoginService } from '../../services/userlogin.service';
 import { Observable } from 'rxjs';
 import { NotifierService } from 'angular-notifier';
 import { AuthenticationService } from '../../services/authentication.service';
+declare var $: any;
 
 @Component({
   selector: 'app-admin-layout',
@@ -28,8 +29,26 @@ export class AdminLayoutComponent implements OnInit {
     invalidLogin = false;
 
     constructor(public location: Location, private router: Router, private formBuilder: FormBuilder,
-        private loginservice: AuthenticationService) {
+        private loginservice: AuthenticationService, notifier: NotifierService) {
         //this.loginservice.isUserLoggedIn;
+        this.notifier = notifier;
+    }
+
+    showNotification(from, align, message, color) {
+        const type = ['', 'info', 'success', 'warning', 'danger'];
+
+        //var color = Math.floor((Math.random() * 4) + 1);
+        $.notify({
+            icon: "pe-7s-close-circle",
+            message: message
+        }, {
+            type: color,
+            timer: 1000,
+            placement: {
+                from: from,
+                align: align
+            }
+        });
     }
 
     ngOnInit() {
@@ -132,6 +151,7 @@ export class AdminLayoutComponent implements OnInit {
                     this.invalidLogin = false;
                 } else {
                     //alert("llego aqui por ser 0");
+                    this.showNotification('top', 'right', 'Usuario y/o contrase&ntilde;a incorrectos', 'warning');
                     this.invalidLogin = true;
                 }
             }, error => console.error(error));

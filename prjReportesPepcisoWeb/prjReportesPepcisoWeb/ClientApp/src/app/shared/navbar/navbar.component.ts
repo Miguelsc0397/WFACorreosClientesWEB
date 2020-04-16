@@ -1,7 +1,9 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { AuthenticationService } from '../../services/authentication.service';
+import { ConfirmacionLogoutComponent } from '../../confirmacion-logout/confirmacion-logout.component';
 
 @Component({
     // moduleId: module.id,
@@ -16,9 +18,22 @@ export class NavbarComponent implements OnInit{
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(location: Location, private element: ElementRef, private loginservice: AuthenticationService) {
+    constructor(location: Location, private element: ElementRef, private loginservice: AuthenticationService, public dialog: MatDialog) {
       this.location = location;
           this.sidebarVisible = false;
+    }
+
+    openDialog(): void {
+        const dialogref = this.dialog.open(ConfirmacionLogoutComponent, {
+            width: '270px',
+            data: "Se limpiará el resultado de la consulta, ¿ desea continuar ?",
+
+        });
+        
+
+        dialogref.afterClosed().subscribe(result => {
+            
+        });
     }
 
     ngOnInit(){

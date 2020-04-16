@@ -9,11 +9,23 @@
                 <form role="form" [formGroup]="loginForm">
                     <div class="form-group">
                         <label style="font-weight: normal !important;">Nombre de usuario</label>
-                        <input type="text" class="form-control" formControlName="usuario" placeholder="Usuario" />
+                        <input type="text" class="form-control" formControlName="usuario" [ngClass]="{ 'is-invalid': submitted && f.usuario.errors }" placeholder="Usuario" />
+                        <div *ngIf="submitted && f.usuario.errors" class="alert alert-danger" role="alert">
+                            <!--<div *ngIf="f.usuario.errors.required">Usuario requerido</div>-->
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            <span class="sr-only">Error:</span>
+                            Usuario requerido
+                        </div>
                     </div>
                     <div class="form-group">
                         <label style="font-weight: normal !important;">Contrase&ntilde;a</label>
-                        <input type="password" class="form-control" formControlName="password" placeholder="Password" />
+                        <input type="password" class="form-control" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Contrase&ntilde;a" />
+                        <div *ngIf="submitted && f.password.errors" class="alert alert-danger" role="alert">
+                            <!--<div *ngIf="f.usuario.errors.required">Usuario requerido</div>-->
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            <span class="sr-only">Error:</span>
+                            Contrase&ntilde;a requerida
+                        </div>
                     </div>
                     <div class="form-group">
                         <button class="btn btn-info btn-fill" (click)="isLogin()">Login</button>
