@@ -121,7 +121,7 @@ namespace WFACorreosClientesWEB.DataAccess
                     cmd.Parameters.AddWithValue("@claveCliente", datacorreo.Numerocliente);
                     cmd.Parameters.AddWithValue("@correosCliente", datacorreo.Correosnuevos);
                     cmd.Parameters.AddWithValue("@pagoAnticipado", SqlDbType.Bit).Value = datacorreo.Pagos == true ? 1 : 0;
-                    cmd.Parameters.AddWithValue("@usuario", SqlDbType.VarChar).Value = "SISTEMAS";
+                    cmd.Parameters.AddWithValue("@usuario", SqlDbType.VarChar).Value = datacorreo.Usuario.ToString();
 
                     con.Open();
                     cmd.ExecuteNonQuery();

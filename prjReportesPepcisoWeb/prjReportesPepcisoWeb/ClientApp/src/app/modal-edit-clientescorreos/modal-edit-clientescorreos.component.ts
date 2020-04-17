@@ -24,12 +24,14 @@ export class ModalEditClientescorreosComponent implements OnInit {
 
     editProfileForm: FormGroup;
     submitted = false;
+    public user: string;
 
     constructor(
         public dialogRef: MatDialogRef<ModalEditClientescorreosComponent>,
         @Inject(MAT_DIALOG_DATA) public data: DialogData, private formBuilder: FormBuilder, private _clientesService: ClientesFiltroService) { }
 
     ngOnInit() {
+
         this.editProfileForm = this.formBuilder.group({
             numerocliente: [''],
             nombrecliente: [''],
@@ -39,13 +41,6 @@ export class ModalEditClientescorreosComponent implements OnInit {
         }, {
         });
 
-        //this.editProfileForm = this.formBuilder.group({
-        //    numerocliente: new FormControl({ value: '', disabled: true }, Validators.required),
-        //    nombrecliente: new FormControl({ value: '', disabled: true }),
-        //    correosactuales: new FormControl({ value: '', disabled: true }),
-        //    correosnuevos: new FormControl({ value: '' }),
-        //    pagos: new FormControl({ value: false })
-        //});
   }
 
     onNoClick(): void {

@@ -29,7 +29,6 @@
 
                         <thead>
                             <tr>
-                                <th></th>
                                 <th>Cliente</th>
                                 <th>Nombre</th>
                                 <th>Factura</th>
@@ -43,8 +42,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let factura of facturaList">
-                                <th><input type="checkbox"></th>
+                            <tr *ngFor="let factura of facturaList" (click)="RowSelected(factura);">
                                 <td>{{ factura.cliente }}</td>
                                 <td>{{ factura.nombre }}</td>
                                 <td>{{ factura.factura }}</td>

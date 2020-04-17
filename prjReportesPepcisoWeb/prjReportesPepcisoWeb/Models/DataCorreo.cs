@@ -12,6 +12,7 @@ namespace WFACorreosClientesWEB.Models
         public bool? Pagos { get; set; }
         public string Correosactuales { get; set; }
         public string Correosnuevos { get; set; }
+        public string Usuario { get; set; }
         
     }
 }

@@ -31,6 +31,10 @@ export class ClientesFiltroService {
     }
 
     updateClientesCorreos(datacorreo: DataCorreo) {
+
+        let user = sessionStorage.getItem('usuario')
+        datacorreo.usuario = user;
+
         if (datacorreo.pagos == null) {
             datacorreo.pagos = false;
         }

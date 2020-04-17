@@ -4,4 +4,5 @@
     pagos: boolean;
     correosactuales: string;
     correosnuevos: string;
+    usuario: string;
 }

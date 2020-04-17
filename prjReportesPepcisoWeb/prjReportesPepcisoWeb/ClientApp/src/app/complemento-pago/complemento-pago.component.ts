@@ -23,8 +23,11 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
     public rfcList: ClientesRFC[];
     public facturaList: FacturasRFC[];
     public facturaForm: FormGroup;
+    public seleccionados: Array<FacturasRFC> = [];
 
     dtTrigger: Subject<any> = new Subject();
+    selectedUser: any;
+
 
     constructor(private formBuilder: FormBuilder, private _clientesrfcService: ClientesRFCService,
         private _facturasrfcService: FacturasRFCService, notifier: NotifierService) {
@@ -110,6 +113,14 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
         };
 
     }
+
+    RowSelected(u: any) {
+        //this.selectedUser = u;   // declare variable in component.
+        console.log(u);
+        this.seleccionados.push(u);
+        console.log(this.seleccionados);
+    }
+
 
     onSubmit() {
         this.submitted = true;
