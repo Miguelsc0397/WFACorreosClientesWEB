@@ -32,5 +32,12 @@ namespace WFACorreosClientesWEB.Controllers
         {
             return objfacturas.GetFacturasRFCs(datafactura);
         }
+
+        [HttpPost]
+        [Route("Consultar")]
+        public DataPendiente Consultar([FromBody] DataFactura datafactura)
+        {
+            return objfacturas.GetPendientes(datafactura); 
+        }
     }
 }

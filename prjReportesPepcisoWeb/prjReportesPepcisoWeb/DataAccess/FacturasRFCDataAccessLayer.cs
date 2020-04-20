@@ -65,6 +65,45 @@ namespace WFACorreosClientesWEB.DataAccess
             }
         }
 
+        public DataPendiente GetPendientes(DataFactura datafactura)
+        {
+            try
+            {
+                DataPendiente datos = new DataPendiente();
+                //string sRespuesta = "";
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("Facturacion.spu_COMP_ConAplicacionesPendientesRFC", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@sRFC", datafactura.Opcion.Trim());
+
+                    con.Open();
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        datos.Opcion = rdr["sRespuesta"].ToString();
+                        if (datos.Opcion != "")
+                        {
+                            
+                        }
+                        else
+                        {
+                            datos.Opcion = null;
+                        }
+                    }
+                    con.Close();
+                    
+                }
+                return datos;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         //public IEnumerable<ClientesFiltro> GetClientesFiltros(DataFiltro datafiltro)
         //{
         //    try
@@ -187,7 +226,7 @@ namespace WFACorreosClientesWEB.DataAccess
 
         //        throw;
         //    }
-            
+
         //}
     }
 }

@@ -36,6 +36,7 @@
     <None Remove="ClientApp\src\models\datacorreo.ts" />
     <None Remove="ClientApp\src\models\datafactura.ts" />
     <None Remove="ClientApp\src\models\datafiltro.ts" />
+    <None Remove="ClientApp\src\models\datapendiente.ts" />
     <None Remove="ClientApp\src\models\facturasrfc.ts" />
     <None Remove="ClientApp\src\models\heineken_desinst.ts" />
     <None Remove="ClientApp\src\models\heineken_inst.ts" />
@@ -50,6 +51,9 @@
     <TypeScriptCompile Include="ClientApp\src\models\clientesfiltro.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\clientesrfc.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\datacorreo.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\models\datapendiente.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\models\datafactura.ts" />

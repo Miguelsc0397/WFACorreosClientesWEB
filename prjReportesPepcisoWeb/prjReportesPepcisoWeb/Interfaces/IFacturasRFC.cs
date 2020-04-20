@@ -9,5 +9,7 @@ namespace WFACorreosClientesWEB.Interfaces
     public interface IFacturasRFC
     {
         IEnumerable<FacturasRFC> GetFacturasRFCs(DataFactura datafactura);
+
+        DataPendiente GetPendientes(DataFactura datafactura);
     }
 }

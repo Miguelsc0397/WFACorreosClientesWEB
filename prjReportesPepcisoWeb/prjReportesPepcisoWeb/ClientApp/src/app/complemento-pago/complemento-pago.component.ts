@@ -7,6 +7,7 @@ import { FacturasRFCService } from '../services/facturasrfc.service';
 import { NotifierService } from 'angular-notifier';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
+import { DataPendiente } from '../../models/datapendiente';
 declare var $: any;
 
 @Component({
@@ -24,6 +25,7 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
     public facturaList: FacturasRFC[];
     public facturaForm: FormGroup;
     public seleccionados: Array<FacturasRFC> = [];
+    public nose: string = "";
 
     dtTrigger: Subject<any> = new Subject();
     selectedUser: any;
@@ -140,6 +142,11 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
         }, error => {
             console.log(error);
         });
+
+        this._facturasrfcService.aplicacionesPend(this.facturaForm.value)
+            .subscribe((data: DataPendiente) => {
+                console.log(data);
+            }, error => console.error(error));
     }
 
 }

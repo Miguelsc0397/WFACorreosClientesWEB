@@ -22,4 +22,16 @@ export class FacturasRFCService {
             }));
     }
 
+    aplicacionesPend(datafactura: DataFactura) {
+        return this._http.post(this.myAppUrl + 'Consultar', datafactura).pipe(map(
+            response => {
+                return response;
+            }));
+    }
+
+    //aplicacionesPend2(datafactura: DataFactura) {
+    //    return this._http.post(this.myAppUrl + 'Consultar', { responseType: 'text' })        // Notice the additional parameter here
+    //        .pipe(map((response: Response)=<any[]>response.json()));
+    //}
+
 }
