@@ -8,6 +8,8 @@ import { NotifierService } from 'angular-notifier';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { DataPendiente } from '../../models/datapendiente';
+import { ModalAplicacionesPendientesComponent } from '../modal-aplicaciones-pendientes/modal-aplicaciones-pendientes.component';
+import { MatDialog, MatDialogRef } from '@angular/material';
 declare var $: any;
 
 @Component({
@@ -25,14 +27,14 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
     public facturaList: FacturasRFC[];
     public facturaForm: FormGroup;
     public seleccionados: Array<FacturasRFC> = [];
-    public nose: string = "";
+    public pendiente: DataPendiente;
 
     dtTrigger: Subject<any> = new Subject();
     selectedUser: any;
 
 
     constructor(private formBuilder: FormBuilder, private _clientesrfcService: ClientesRFCService,
-        private _facturasrfcService: FacturasRFCService, notifier: NotifierService) {
+        private _facturasrfcService: FacturasRFCService, notifier: NotifierService, public dialog: MatDialog) {
         this.notifier = notifier;
     }
 
@@ -87,7 +89,7 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
             pagingType: 'full_numbers',
             pageLength: 100,
             processing: true,
-            scrollY: "400",
+            scrollY: "280",
             scrollX: true,
             select: true,
             language: {
@@ -104,14 +106,6 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
 
                 }
             }
-            //rowCallback: (row: Node, data: any[] | Object, index: number) => {
-            //    const self = this;
-            //    $('td', row).unbind('selected');
-            //    $('td', row).bind('selected', () => {
-            //        //self.someClickHandler(data);
-            //    });
-            //    return row;
-            //}
         };
 
     }
@@ -121,6 +115,15 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
         console.log(u);
         this.seleccionados.push(u);
         console.log(this.seleccionados);
+    }
+
+    respuestaPend(respuesta: DataPendiente) {
+        const dialogRef = this.dialog.open(ModalAplicacionesPendientesComponent, {
+            width: '530px',
+            data: {
+                opcion: respuesta.opcion
+            }         
+        });
     }
 
 
@@ -145,6 +148,11 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
 
         this._facturasrfcService.aplicacionesPend(this.facturaForm.value)
             .subscribe((data: DataPendiente) => {
+                if (data.opcion != "") {
+                    this.respuestaPend(data);
+                } else {
+
+                }
                 console.log(data);
             }, error => console.error(error));
     }

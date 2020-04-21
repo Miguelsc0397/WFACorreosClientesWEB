@@ -83,14 +83,14 @@ namespace WFACorreosClientesWEB.DataAccess
                     while (rdr.Read())
                     {
                         datos.Opcion = rdr["sRespuesta"].ToString();
-                        if (datos.Opcion != "")
-                        {
+                        //if (datos.Opcion != "")
+                        //{
                             
-                        }
-                        else
-                        {
-                            datos.Opcion = null;
-                        }
+                        //}
+                        //else
+                        //{
+                        //    datos.Opcion = null;
+                        //}
                     }
                     con.Close();
                     

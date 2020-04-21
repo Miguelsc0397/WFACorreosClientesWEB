@@ -4,7 +4,7 @@
         <div style="text-align: left;">
             <div class="form-group">
                 <label style="font-weight: normal !important;">Clientes</label>&nbsp;
-                <select class="form-control" formControlName="opcion">
+                <select class="form-control" formControlName="opcion" style="width: 80%;">
                     <option *ngFor="let pagos of rfcList" [value]="pagos.rfc"> {{ pagos.cliente }} </option>
                 </select>&nbsp;
             </div>
@@ -17,9 +17,9 @@
         </div>
     </form>
 
-    <button class="btn btn-info btn-fill" (click)="rerender()">
+    <!--<button class="btn btn-info btn-fill" (click)="rerender()">
         Rerender
-    </button>
+    </button>-->
 
     <div class="row">
         <div class="col-md-12">
@@ -59,31 +59,49 @@
 
                 </div>
             </div>
+
+            <form class="form-inline">
+                <div style="text-align: left;">
+                    <div class="form-group">
+                        <label style="font-weight: normal !important;">Nuevo Cliente</label>&nbsp;
+                        <input class="form-control" readonly />&nbsp;
+                        <label style="font-weight: normal !important;">Nueva Divisi&oacute;n</label>&nbsp;
+                        <select class="form-control">
+                            <option value="div01">01</option>
+                            <option value="div03">03</option>
+                        </select>&nbsp;
+                    </div>
+                </div>
+            </form>
+
         </div>
     </div>
 
+   
+    
+
 </div>
 
-<!-- The Modal -->
+ <!--The Modal 
 <div class="modal" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
 
-            <!-- Modal Header -->
+             Modal Header 
             <div class="modal-header">
                 <h4 class="modal-title">EDITA CORREOS</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
-            <!-- Modal body -->
+             Modal body 
             <div class="modal-body">
-                <!--Hi : <span class="username"></span>-->
+                Hi : <span class="username"></span>
                 <div class="content">
                     <p>No se mostraron facturas del cliente seleccionado</p>
                 </div>
             </div>
 
-            <!-- Modal footer -->
+             Modal footer 
             <div class="modal-footer">
                 <div class="row">
                     <div class="col-md-6">
@@ -94,4 +112,4 @@
 
         </div>
     </div>
-</div>
+</div>-->

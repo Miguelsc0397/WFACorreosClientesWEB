@@ -18,6 +18,7 @@ import { ConfirmacionEditComponent } from './confirmacion-edit/confirmacion-edit
 import { ModalEditClientescorreosComponent } from './modal-edit-clientescorreos/modal-edit-clientescorreos.component';
 import { NotifierModule, NotifierOptions } from "angular-notifier";
 import { ConfirmacionLogoutComponent } from './confirmacion-logout/confirmacion-logout.component';
+import { ModalAplicacionesPendientesComponent } from './modal-aplicaciones-pendientes/modal-aplicaciones-pendientes.component';
 
 const customNotifierOptions: NotifierOptions = {
     position: {
@@ -81,10 +82,11 @@ const customNotifierOptions: NotifierOptions = {
         ConfirmacionDialogoComponent,
         ConfirmacionEditComponent,
         ModalEditClientescorreosComponent,
-        ConfirmacionLogoutComponent
+        ConfirmacionLogoutComponent,
+        ModalAplicacionesPendientesComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
-    entryComponents: [ConfirmacionDialogoComponent, ConfirmacionEditComponent, ModalEditClientescorreosComponent, ConfirmacionLogoutComponent]
+    entryComponents: [ConfirmacionDialogoComponent, ConfirmacionEditComponent, ModalEditClientescorreosComponent, ConfirmacionLogoutComponent, ModalAplicacionesPendientesComponent]
 })
 export class AppModule { }
