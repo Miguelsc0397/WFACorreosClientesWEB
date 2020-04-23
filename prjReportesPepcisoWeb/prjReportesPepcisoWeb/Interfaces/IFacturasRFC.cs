@@ -11,5 +11,9 @@ namespace WFACorreosClientesWEB.Interfaces
         IEnumerable<FacturasRFC> GetFacturasRFCs(DataFactura datafactura);
 
         DataPendiente GetPendientes(DataFactura datafactura);
+
+        int GetConfirms(DataPendiente datapendiente);
+
+        int GetCancels(DataPendiente datapendiente);
     }
 }

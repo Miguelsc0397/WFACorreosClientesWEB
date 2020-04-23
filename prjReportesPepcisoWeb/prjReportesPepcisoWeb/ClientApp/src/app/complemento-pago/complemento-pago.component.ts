@@ -9,6 +9,8 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { DataPendiente } from '../../models/datapendiente';
 import { ModalAplicacionesPendientesComponent } from '../modal-aplicaciones-pendientes/modal-aplicaciones-pendientes.component';
+import { ConfirmacionPendientesComponent } from '../confirmacion-pendientes/confirmacion-pendientes.component';
+import { CancelacionPendientesComponent } from '../cancelacion-pendientes/cancelacion-pendientes.component';
 import { MatDialog, MatDialogRef } from '@angular/material';
 declare var $: any;
 
@@ -27,7 +29,7 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
     public facturaList: FacturasRFC[];
     public facturaForm: FormGroup;
     public seleccionados: Array<FacturasRFC> = [];
-    public pendiente: DataPendiente;
+    
 
     dtTrigger: Subject<any> = new Subject();
     selectedUser: any;
@@ -123,6 +125,28 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
             data: {
                 opcion: respuesta.opcion
             }         
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+
+            console.log(result);
+            if (result == 'yes') {
+                const dialogRefCon = this.dialog.open(ConfirmacionPendientesComponent, {
+                    width: '530px',
+                    data: {
+                        opcion: respuesta.opcion
+                    }
+                });
+            } else {
+                if (result == 'cancelar') {
+                    const dialogRefCan = this.dialog.open(CancelacionPendientesComponent, {
+                        width: '530px',
+                        data: {
+                            opcion: respuesta.opcion
+                        }
+                    });
+                }              
+            }
         });
     }
 

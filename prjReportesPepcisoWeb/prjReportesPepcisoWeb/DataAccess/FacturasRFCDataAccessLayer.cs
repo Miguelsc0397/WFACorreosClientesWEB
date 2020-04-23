@@ -104,6 +104,66 @@ namespace WFACorreosClientesWEB.DataAccess
             }
         }
 
+        public int GetConfirms(DataPendiente datapendiente)
+        {
+            try
+            {
+                string respuesta = "";
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("Facturacion.spu_COMP_ActCambiosClientes", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    respuesta = datapendiente.Opcion;
+                    respuesta = respuesta.Substring(1,5);
+
+                    cmd.Parameters.AddWithValue("@idCambio", SqlDbType.Int).Value = respuesta;
+                    cmd.Parameters.AddWithValue("@sEstatosNew", SqlDbType.Char).Value = "T".ToString();
+                    cmd.Parameters.AddWithValue("@sUsuario", SqlDbType.Char).Value = datapendiente.Usuario.ToString();
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+                return 1;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public int GetCancels(DataPendiente datapendiente)
+        {
+            try
+            {
+                string respuesta = "";
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("Facturacion.spu_COMP_ActCambiosClientes", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    respuesta = datapendiente.Opcion;
+                    respuesta = respuesta.Substring(1, 5);
+
+                    cmd.Parameters.AddWithValue("@idCambio", SqlDbType.Int).Value = respuesta;
+                    cmd.Parameters.AddWithValue("@sEstadosNew", SqlDbType.Char).Value = "C".ToString();
+                    cmd.Parameters.AddWithValue("@sUsuario", SqlDbType.Char).Value = datapendiente.Usuario.ToString();
+
+                    //con.Open();
+                    //cmd.ExecuteNonQuery();
+                    //con.Close();
+                }
+                return 1;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         //public IEnumerable<ClientesFiltro> GetClientesFiltros(DataFiltro datafiltro)
         //{
         //    try

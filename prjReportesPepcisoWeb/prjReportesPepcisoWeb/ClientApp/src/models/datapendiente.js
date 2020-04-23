@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var DataFactura = /** @class */ (function () {
-    function DataFactura() {
+var DataPendiente = /** @class */ (function () {
+    function DataPendiente() {
     }
-    return DataFactura;
+    return DataPendiente;
 }());
-exports.DataFactura = DataFactura;
-//# sourceMappingURL=datafactura.js.map
+exports.DataPendiente = DataPendiente;
+//# sourceMappingURL=datapendiente.js.map

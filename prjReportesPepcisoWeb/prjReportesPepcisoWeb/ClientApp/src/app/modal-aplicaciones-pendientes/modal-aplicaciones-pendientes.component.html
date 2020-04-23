@@ -9,9 +9,9 @@
 <div class="modal-footer">
     <div class="row">
         <div class="col-md-12" style="text-align: right;">
-            <button mat-button>Si</button>
-            <button mat-button>No</button>
-            <button mat-button>Cancelar</button>  
+            <button mat-button (click)="dialogRef.close('yes')">Si</button>
+            <button mat-button (click)="opcionNo()">No</button>
+            <button mat-button (click)="dialogRef.close('cancelar')">Cancelar</button>  
         </div>
     </div>
 </div>

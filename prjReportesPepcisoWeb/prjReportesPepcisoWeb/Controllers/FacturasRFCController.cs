@@ -39,5 +39,20 @@ namespace WFACorreosClientesWEB.Controllers
         {
             return objfacturas.GetPendientes(datafactura); 
         }
+
+        [HttpPost]
+        [Route("Confirmar")]
+        public int Confirmar([FromBody] DataPendiente datapendiente)
+        {
+            return objfacturas.GetConfirms(datapendiente);
+        }
+
+        [HttpPost]
+        [Route("Cancelar")]
+        public int Cancelar([FromBody] DataPendiente datapendiente)
+        {
+            return objfacturas.GetCancels(datapendiente);
+        }
+
     }
 }

@@ -8,5 +8,6 @@ namespace WFACorreosClientesWEB.Models
     public class DataFactura
     {
         public string Opcion { get; set; }
+
     }
 }

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { DataFactura } from '../../models/datafactura';
 import { ClientesRFC } from '../../models/clientesrfc';
+import { DataPendiente } from '../../models/datapendiente';
 
 @Injectable({
     providedIn: 'root'
@@ -28,6 +29,29 @@ export class FacturasRFCService {
                 return response;
             }));
     }
+
+    confirmPendiente(datapendiente: DataPendiente) {
+
+        let user = sessionStorage.getItem('usuario')
+        datapendiente.usuario = user;
+
+        return this._http.post(this.myAppUrl + 'Confirmar', datapendiente).pipe(map(
+            response => {
+                return response;
+            }));
+    }
+
+    cancelPendiente(datapendiente: DataPendiente) {
+
+        let user = sessionStorage.getItem('usuario')
+        datapendiente.usuario = user;
+
+        return this._http.post(this.myAppUrl + 'Cancelar', datapendiente).pipe(map(
+            response => {
+                return response;
+            }));
+    }
+
 
     //aplicacionesPend2(datafactura: DataFactura) {
     //    return this._http.post(this.myAppUrl + 'Consultar', { responseType: 'text' })        // Notice the additional parameter here

@@ -8,5 +8,6 @@ namespace WFACorreosClientesWEB.Models
     public class DataPendiente
     {
         public string Opcion { get; set; }
+        public string Usuario { get; set; }
     }
 }

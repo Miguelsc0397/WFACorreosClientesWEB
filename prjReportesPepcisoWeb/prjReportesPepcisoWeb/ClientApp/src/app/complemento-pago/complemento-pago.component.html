@@ -4,7 +4,7 @@
         <div style="text-align: left;">
             <div class="form-group">
                 <label style="font-weight: normal !important;">Clientes</label>&nbsp;
-                <select class="form-control" formControlName="opcion" style="width: 80%;">
+                <select class="form-control" formControlName="opcion">
                     <option *ngFor="let pagos of rfcList" [value]="pagos.rfc"> {{ pagos.cliente }} </option>
                 </select>&nbsp;
             </div>
@@ -67,9 +67,13 @@
                         <input class="form-control" readonly />&nbsp;
                         <label style="font-weight: normal !important;">Nueva Divisi&oacute;n</label>&nbsp;
                         <select class="form-control">
+                            <option selected disabled hidden style='display: none' value=''></option>
                             <option value="div01">01</option>
                             <option value="div03">03</option>
                         </select>&nbsp;
+                        <div class="form-group">
+                            <button class="btn btn-info btn-fill" (click)="cambiosAplicar()">Aplicar Cambio Cliente</button>
+                        </div>
                     </div>
                 </div>
             </form>
