@@ -34,6 +34,7 @@
     <None Remove="ClientApp\src\models\clientesfiltro.ts" />
     <None Remove="ClientApp\src\models\clientesrfc.ts" />
     <None Remove="ClientApp\src\models\datacorreo.ts" />
+    <None Remove="ClientApp\src\models\datadivision.ts" />
     <None Remove="ClientApp\src\models\datafactura.ts" />
     <None Remove="ClientApp\src\models\datafiltro.ts" />
     <None Remove="ClientApp\src\models\datapendiente.ts" />
@@ -51,6 +52,9 @@
     <TypeScriptCompile Include="ClientApp\src\models\clientesfiltro.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\clientesrfc.ts" />
     <TypeScriptCompile Include="ClientApp\src\models\datacorreo.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\models\datadivision.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\models\datapendiente.ts">

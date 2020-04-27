@@ -60,27 +60,30 @@
                 </div>
             </div>
 
-            <form class="form-inline">
+            <form class="form-inline" role="form" [formGroup]="divisionForm">
                 <div style="text-align: left;">
-
-                    <!--<label style="font-weight: normal !important;">Nuevo Cliente</label>&nbsp;-->
-                    <p>Nuevo Cliente:&nbsp;<b>{{selectedDay}}</b></p>
                     <div class="form-group">
+                        <label style="font-weight: normal !important;">Nuevo Cliente</label>&nbsp;
+                        <input class="form-control" formControlName="cliente" readonly [value]="selectedDay"/>&nbsp;
                         <label style="font-weight: normal !important;">Nueva Divisi&oacute;n</label>&nbsp;
-                        <select class="form-control">
+                        <select class="form-control" formControlName="division">
                             <option selected disabled hidden style='display: none' value=''></option>
                             <option value="div01">01</option>
                             <option value="div03">03</option>
                         </select>&nbsp;
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-info btn-fill" (click)="cambiosAplicar()">Aplicar Cambio Cliente</button>
+                        <div class="form-group">
+                            <button class="btn btn-info btn-fill" (click)="cambiosAplicar()">Aplicar Cambio Cliente</button>
+                        </div>
                     </div>
                 </div>
             </form>
 
         </div>
     </div>
+
+   
+    
+
 </div>
 
  <!--The Modal 

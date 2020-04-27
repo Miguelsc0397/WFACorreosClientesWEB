@@ -44,7 +44,7 @@ export class ClientesFiltroComponent implements OnInit {
     //}
 
     someClickHandler(info: any): void {
-        this.parametros.clave_cliente = info[0];
+        this.parametros.clave_cliente = info.clave_cliente;
 
         this._clientesService.consultgarRFC(this.parametros)
             .subscribe((response: ClientesFiltro) => {
@@ -104,7 +104,7 @@ export class ClientesFiltroComponent implements OnInit {
             pagingType: 'full_numbers',
             pageLength: 100,
             processing: true,
-            scrollY: "400",
+            scrollY: "300",
             scrollX: true,
             responsive: true,
             language: {
@@ -120,17 +120,23 @@ export class ClientesFiltroComponent implements OnInit {
                     last: "&Uacute;ltimo",
 
                 }
-            },
-            rowCallback: (row: Node, data: any[] | Object, index: number) => {
-                const self = this;
-                $('td', row).unbind('dblclick');
-                $('td', row).bind('dblclick', () => {
-                    self.someClickHandler(data);
-                });
-                return row;
             }
+            //rowCallback: (row: Node, data: any[] | Object, index: number) => {
+            //    const self = this;
+            //    $('td', row).unbind('dblclick');
+            //    $('td', row).bind('dblclick', () => {
+            //        self.someClickHandler(data);
+            //    });
+            //    return row;
+            //}
 
         };
+
+        $(document).on('click', '.getDetails', function () {
+            $(".username").text("");
+            $(".username").text($(this).parents("tr").find(".fname").text());
+            $("#myModal").modal('show');
+        });
 
     }
 
@@ -138,10 +144,10 @@ export class ClientesFiltroComponent implements OnInit {
 
 
     onSubmit() {
-        //this.submitted = true;
+        this.submitted = true;
 
-        //this._clientesService.paramFiltro(this.filtroForm.value).subscribe(
-        //    (data: ClientesFiltro[]) => this.filtroList = data);
+        this._clientesService.paramFiltro(this.filtroForm.value).subscribe(
+            (data: ClientesFiltro[]) => this.filtroList = data);
 
       
     }

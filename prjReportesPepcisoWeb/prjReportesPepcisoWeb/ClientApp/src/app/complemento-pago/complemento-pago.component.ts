@@ -11,6 +11,7 @@ import { DataPendiente } from '../../models/datapendiente';
 import { ModalAplicacionesPendientesComponent } from '../modal-aplicaciones-pendientes/modal-aplicaciones-pendientes.component';
 import { ConfirmacionPendientesComponent } from '../confirmacion-pendientes/confirmacion-pendientes.component';
 import { CancelacionPendientesComponent } from '../cancelacion-pendientes/cancelacion-pendientes.component';
+import { ConfirmacionDivisionComponent } from '../confirmacion-division/confirmacion-division.component';
 import { MatDialog, MatDialogRef } from '@angular/material';
 declare var $: any;
 
@@ -28,6 +29,7 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
     public rfcList: ClientesRFC[];
     public facturaList: FacturasRFC[];
     public facturaForm: FormGroup;
+    public divisionForm: FormGroup;
     public seleccionados: Array<FacturasRFC> = [];
     selectedDay: string = '';
     
@@ -40,6 +42,7 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
         private _facturasrfcService: FacturasRFCService, notifier: NotifierService, public dialog: MatDialog) {
         this.notifier = notifier;
     }
+    isChecked = false;
 
     ngAfterViewInit(): void {
         this.dtTrigger.next();
@@ -92,7 +95,7 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
             pagingType: 'full_numbers',
             pageLength: 100,
             processing: true,
-            scrollY: "250",
+            scrollY: "280",
             scrollX: true,
             select: true,
             language: {
@@ -118,6 +121,12 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
         console.log(u);
         this.seleccionados.push(u);
         console.log(this.seleccionados);
+
+        //if (this.seleccionados.length >= 2) {
+
+        //} else {
+        //    this.seleccionados.length = 0;
+        //}
     }
 
     respuestaPend(respuesta: DataPendiente) {
@@ -157,6 +166,33 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
         this.selectedDay = text;
 
         console.log(this.selectedDay);
+    }
+
+    //checkuncheckall() {
+    //    if (this.isChecked == true) {
+    //        this.isChecked = false;
+    //    }
+    //    else {
+    //        this.isChecked = true;
+    //    }
+
+    //}
+
+    cambiosAplicar() {
+        
+        if (this.seleccionados.length < 2) {
+            alert("debes seleccionador al menos 2 facturas");
+
+        } else {
+            alert("si llego aqui porque si trae los datos bien");
+            const dialogRef = this.dialog.open(ConfirmacionDivisionComponent, {
+                width: '530px',
+                data: {
+                    //opcion: respuesta.opcion
+                }
+            });
+        }
+        
     }
 
 
