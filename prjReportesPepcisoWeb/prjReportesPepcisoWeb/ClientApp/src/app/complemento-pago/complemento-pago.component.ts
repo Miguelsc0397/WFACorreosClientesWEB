@@ -29,6 +29,7 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
     public facturaList: FacturasRFC[];
     public facturaForm: FormGroup;
     public seleccionados: Array<FacturasRFC> = [];
+    selectedDay: string = '';
     
 
     dtTrigger: Subject<any> = new Subject();
@@ -91,7 +92,7 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
             pagingType: 'full_numbers',
             pageLength: 100,
             processing: true,
-            scrollY: "280",
+            scrollY: "250",
             scrollX: true,
             select: true,
             language: {
@@ -148,6 +149,14 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
                 }              
             }
         });
+    }
+
+    callValue($event) {
+        let text = $event.target.options[$event.target.options.selectedIndex].text;
+        text = text.substring(16, 24);
+        this.selectedDay = text;
+
+        console.log(this.selectedDay);
     }
 
 

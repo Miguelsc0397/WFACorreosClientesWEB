@@ -9,5 +9,6 @@ namespace WFACorreosClientesWEB.Models
     {
         public string Opcion { get; set; }
         public string Usuario { get; set; }
+        public string Cliente { get; set; }
     }
 }

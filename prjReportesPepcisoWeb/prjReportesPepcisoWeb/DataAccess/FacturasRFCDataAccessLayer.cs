@@ -151,9 +151,9 @@ namespace WFACorreosClientesWEB.DataAccess
                     cmd.Parameters.AddWithValue("@sEstadosNew", SqlDbType.Char).Value = "C".ToString();
                     cmd.Parameters.AddWithValue("@sUsuario", SqlDbType.Char).Value = datapendiente.Usuario.ToString();
 
-                    //con.Open();
-                    //cmd.ExecuteNonQuery();
-                    //con.Close();
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
                 }
                 return 1;
             }
