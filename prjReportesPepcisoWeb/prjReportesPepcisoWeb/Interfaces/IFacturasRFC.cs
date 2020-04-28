@@ -15,5 +15,7 @@ namespace WFACorreosClientesWEB.Interfaces
         int GetConfirms(DataPendiente datapendiente);
 
         int GetCancels(DataPendiente datapendiente);
+
+        int GetDivisionEdit(DataDivision datadivision);
     }
 }

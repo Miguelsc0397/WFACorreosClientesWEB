@@ -54,5 +54,13 @@ namespace WFACorreosClientesWEB.Controllers
             return objfacturas.GetCancels(datapendiente);
         }
 
+        [HttpPost]
+        [Route("Editar")]
+        public int Editar([FromBody] DataDivision datadivision)
+        {
+            return objfacturas.GetDivisionEdit(datadivision);
+        }
+
+
     }
 }

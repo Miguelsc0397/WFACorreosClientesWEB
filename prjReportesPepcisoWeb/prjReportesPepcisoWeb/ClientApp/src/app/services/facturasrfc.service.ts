@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { DataFactura } from '../../models/datafactura';
 import { ClientesRFC } from '../../models/clientesrfc';
 import { DataPendiente } from '../../models/datapendiente';
+import { DataDivision } from '../../models/datadivision';
 
 @Injectable({
     providedIn: 'root'
@@ -47,6 +48,17 @@ export class FacturasRFCService {
         datapendiente.usuario = user;
 
         return this._http.post(this.myAppUrl + 'Cancelar', datapendiente).pipe(map(
+            response => {
+                return response;
+            }));
+    }
+
+    actualizaDiv(datadivision: DataDivision) {
+
+        let user = sessionStorage.getItem('usuario')
+        datadivision.usuario = user;
+
+        return this._http.post(this.myAppUrl + 'Editar', datadivision).pipe(map(
             response => {
                 return response;
             }));

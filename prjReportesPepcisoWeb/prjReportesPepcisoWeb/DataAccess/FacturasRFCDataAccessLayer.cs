@@ -164,6 +164,33 @@ namespace WFACorreosClientesWEB.DataAccess
             }
         }
 
+        public int GetDivisionEdit(DataDivision datadivision)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("Facturacion.spu_COMP_InsCambiosClientes", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@sClienteRFC", SqlDbType.NVarChar).Value = datadivision.Rfc.ToString().Trim();
+                    cmd.Parameters.AddWithValue("@sClienteNew", SqlDbType.Char).Value = datadivision.Cliente.ToString().Trim();
+                    cmd.Parameters.AddWithValue("@DivisionNew", SqlDbType.Char).Value = datadivision.Division.ToString().Trim();
+                    cmd.Parameters.AddWithValue("@sUsuario", SqlDbType.Char).Value = datadivision.Usuario.ToString().Trim();
+
+                    //con.Open();
+                    //cmd.ExecuteNonQuery();
+                    //con.Close();
+                }
+                return 1;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         //public IEnumerable<ClientesFiltro> GetClientesFiltros(DataFiltro datafiltro)
         //{
         //    try

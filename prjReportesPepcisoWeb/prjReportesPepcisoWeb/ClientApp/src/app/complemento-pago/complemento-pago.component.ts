@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientesRFC } from '../../models/clientesrfc';
 import { ClientesRFCService } from '../services/clientesrfc.service';
@@ -29,9 +29,14 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
     public rfcList: ClientesRFC[];
     public facturaList: FacturasRFC[];
     public facturaForm: FormGroup;
-    public divisionForm: FormGroup;
     public seleccionados: Array<FacturasRFC> = [];
+    public divisionForm: FormGroup;
     selectedDay: string = '';
+    @ViewChild('fondovalor') fondovalor: ElementRef;
+    @ViewChild('division') division: ElementRef;
+    @ViewChild('rfc') rfc: ElementRef;
+    @ViewChild('content') content: any;
+    display = 'none'; //default Variable
     
 
     dtTrigger: Subject<any> = new Subject();
@@ -86,6 +91,12 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
         this._clientesrfcService.paramPago().subscribe(
             (data: ClientesRFC[]) => this.rfcList = data);
 
+        this.divisionForm = this.formBuilder.group({
+            cliente: [''],
+            division: ['', Validators.required]
+        }, {
+        });
+
         this.facturaForm = this.formBuilder.group({
             opcion: ['', Validators.required]
         }, {
@@ -115,6 +126,9 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
         };
 
     }
+
+    get g() { return this.facturaForm.controls; }
+    get f() { return this.divisionForm.controls; }
 
     RowSelected(u: any) {
         //this.selectedUser = u;   // declare variable in component.
@@ -180,19 +194,52 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
 
     cambiosAplicar() {
         
+        //this.submitted = true;
+
+        //if (this.divisionForm.invalid) {
+        //    return;
+        //}
+        const valueInput = this.fondovalor.nativeElement.value;
+        const valueDivision = this.division.nativeElement.value;
+        const valueRfc = this.rfc.nativeElement.value;
+        console.log(valueInput);
+        console.log(valueRfc);
+        
         if (this.seleccionados.length < 2) {
-            alert("debes seleccionador al menos 2 facturas");
+            //alert("debes seleccionador al menos 2 facturas");
+            this.showNotification('top', 'right', 'Debes seleccionador al menos 2 facturas', 'warning');
 
         } else {
-            alert("si llego aqui porque si trae los datos bien");
-            const dialogRef = this.dialog.open(ConfirmacionDivisionComponent, {
-                width: '530px',
-                data: {
-                    //opcion: respuesta.opcion
-                }
-            });
+            if (this.f.division.value == "") {
+                this.showNotification('top', 'right', 'Debes seleccionador la division', 'warning');
+            } else {
+                const dialogRef = this.dialog.open(ConfirmacionDivisionComponent, {
+                    width: '530px',
+                    data: {
+                        division: this.f.division.value,
+                        cliente: valueInput,
+                        rfc: valueRfc,
+                        seleccionados: this.seleccionados
+                        //opcion: respuesta.opcion
+                    }
+                });
+            }
         }
         
+        //if (this.seleccionados.length < 2) {
+        //    this.showNotification('top', 'right', 'Debes seleccionador al menos 2 facturas', 'warning');
+        //} else {
+        //    if (this.f.division.value == "") {
+        //        alert("viene vacio");
+        //    } else {
+        //        $("#myModal").modal('show');
+        //    }        
+        //}
+        
+    }
+
+    opcionSi() {
+        alert("si llega aqui");
     }
 
 

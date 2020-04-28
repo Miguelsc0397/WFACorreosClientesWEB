@@ -132,11 +132,9 @@ export class ClientesFiltroComponent implements OnInit {
 
         };
 
-        $(document).on('click', '.getDetails', function () {
-            $(".username").text("");
-            $(".username").text($(this).parents("tr").find(".fname").text());
-            $("#myModal").modal('show');
-        });
+        //$(document).on('click', '.getDetails', function () {
+        //    $("#myModal").modal('show');
+        //});
 
     }
 
