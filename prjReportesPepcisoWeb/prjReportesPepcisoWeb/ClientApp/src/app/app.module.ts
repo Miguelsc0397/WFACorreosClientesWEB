@@ -22,6 +22,7 @@ import { ModalAplicacionesPendientesComponent } from './modal-aplicaciones-pendi
 import { ConfirmacionPendientesComponent } from './confirmacion-pendientes/confirmacion-pendientes.component';
 import { CancelacionPendientesComponent } from './cancelacion-pendientes/cancelacion-pendientes.component';
 import { ConfirmacionDivisionComponent } from './confirmacion-division/confirmacion-division.component';
+import { MensajeCambiodivisionComponent } from './mensaje-cambiodivision/mensaje-cambiodivision.component';
 
 const customNotifierOptions: NotifierOptions = {
     position: {
@@ -89,11 +90,13 @@ const customNotifierOptions: NotifierOptions = {
         ModalAplicacionesPendientesComponent,
         ConfirmacionPendientesComponent,
         CancelacionPendientesComponent,
-        ConfirmacionDivisionComponent
+        ConfirmacionDivisionComponent,
+        MensajeCambiodivisionComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
-    entryComponents: [ConfirmacionDialogoComponent, ConfirmacionEditComponent, ModalEditClientescorreosComponent, ConfirmacionLogoutComponent, ModalAplicacionesPendientesComponent, ConfirmacionPendientesComponent, CancelacionPendientesComponent,
-        ConfirmacionDivisionComponent]
+    entryComponents: [ConfirmacionDialogoComponent, ConfirmacionEditComponent, ModalEditClientescorreosComponent, ConfirmacionLogoutComponent,
+        ModalAplicacionesPendientesComponent, ConfirmacionPendientesComponent, CancelacionPendientesComponent,
+        ConfirmacionDivisionComponent, MensajeCambiodivisionComponent]
 })
 export class AppModule { }

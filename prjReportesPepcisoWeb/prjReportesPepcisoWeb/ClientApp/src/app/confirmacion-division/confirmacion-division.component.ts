@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { FacturasRFCService } from '../services/facturasrfc.service';
 import { DataDivision } from '../../models/datadivision';
+import { MensajeCambiodivisionComponent } from '../mensaje-cambiodivision/mensaje-cambiodivision.component';
 
 export interface DialogData {
     division: string;
@@ -18,9 +19,11 @@ export interface DialogData {
 })
 export class ConfirmacionDivisionComponent implements OnInit {
     public datadivision: DataDivision;
+    //public filial: string;
 
     constructor(public dialogRef: MatDialogRef<ConfirmacionDivisionComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: DialogData, private _facturasrfcService: FacturasRFCService) { }
+        @Inject(MAT_DIALOG_DATA) public data: DialogData, private _facturasrfcService: FacturasRFCService,
+        public dialog: MatDialog) { }
 
     ngOnInit() {
 
@@ -33,17 +36,29 @@ export class ConfirmacionDivisionComponent implements OnInit {
         this.datadivision.cliente = this.data.cliente;
         this.datadivision.division = this.data.division;
         this.datadivision.rfc = this.data.rfc;
+        this.datadivision.filial = "MET";
+        this.datadivision.sucursal = "010";
+        this.datadivision.selectedrows = this.data.seleccionados;
 
         this._facturasrfcService.actualizaDiv(this.datadivision)
             .subscribe((data: number) => {
 
-                //if (data.opcion != "") {
-                //    this.respuestaPend(data);
-                //} else {
+                if (data == 1) {
+                    this.dialogRef.close();
+                    const dialogRef = this.dialog.open(MensajeCambiodivisionComponent, {
+                        width: '530px',
+                        data: {
+                            //division: this.f.division.value,
+                            //cliente: valueInput,
+                            //rfc: valueRfc,
+                            //seleccionados: this.seleccionados
+                            ////opcion: respuesta.opcion
+                        }
+                    });
+                }
 
-                //}
-                //console.log(data);
             }, error => console.error(error));
+        
     }
 
     opcionNo() {

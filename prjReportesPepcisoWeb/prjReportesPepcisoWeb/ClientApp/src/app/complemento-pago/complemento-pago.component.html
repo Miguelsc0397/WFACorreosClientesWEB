@@ -42,7 +42,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let factura of facturaList" (click)="RowSelected(factura);">
+                            <tr *ngFor="let factura of facturaList">
                                 <td>{{ factura.cliente }}</td>
                                 <td>{{ factura.nombre }}</td>
                                 <td>{{ factura.factura }}</td>

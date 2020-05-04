@@ -148,7 +148,7 @@ namespace WFACorreosClientesWEB.DataAccess
                     respuesta = respuesta.Substring(1, 5);
 
                     cmd.Parameters.AddWithValue("@idCambio", SqlDbType.Int).Value = respuesta;
-                    cmd.Parameters.AddWithValue("@sEstadosNew", SqlDbType.Char).Value = "C".ToString();
+                    cmd.Parameters.AddWithValue("@sEstatosNew", SqlDbType.Char).Value = "C".ToString();
                     cmd.Parameters.AddWithValue("@sUsuario", SqlDbType.Char).Value = datapendiente.Usuario.ToString();
 
                     con.Open();
@@ -168,6 +168,7 @@ namespace WFACorreosClientesWEB.DataAccess
         {
             try
             {
+                //DataDivision division = new DataDivision();
                 using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     SqlCommand cmd = new SqlCommand("Facturacion.spu_COMP_InsCambiosClientes", con);
@@ -178,9 +179,34 @@ namespace WFACorreosClientesWEB.DataAccess
                     cmd.Parameters.AddWithValue("@DivisionNew", SqlDbType.Char).Value = datadivision.Division.ToString().Trim();
                     cmd.Parameters.AddWithValue("@sUsuario", SqlDbType.Char).Value = datadivision.Usuario.ToString().Trim();
 
-                    //con.Open();
+                    
+
+                    con.Open();
                     //cmd.ExecuteNonQuery();
                     //con.Close();
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        datadivision.Idcambio = Convert.ToInt32(rdr["idCambio"]);
+                    }
+
+                    foreach (FacturasRFC item in datadivision.Selectedrows)
+                    {
+                        SqlCommand command = new SqlCommand("Facturacion.spu_COMP_cambiosCliente", con);
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        command.Parameters.AddWithValue("@idCambio", SqlDbType.Int).Value = datadivision.Idcambio;
+                        command.Parameters.AddWithValue("@filial", SqlDbType.Char).Value = datadivision.Filial.ToString().Trim();
+                        command.Parameters.AddWithValue("@suc", SqlDbType.Char).Value = datadivision.Sucursal.ToString().Trim();
+                        command.Parameters.AddWithValue("@division", SqlDbType.Char).Value = datadivision.Division.ToString().Trim();
+                        command.Parameters.AddWithValue("@cliente", SqlDbType.Char).Value = datadivision.Cliente.ToString().Trim();
+                        command.Parameters.AddWithValue("@cteAnterior", SqlDbType.Char).Value = item.Cliente.ToString().Trim();
+                        command.Parameters.AddWithValue("@Factura", SqlDbType.Char).Value = item.Factura.ToString().Trim();
+                        command.Parameters.AddWithValue("@Usuario", SqlDbType.Char).Value = datadivision.Usuario.ToString().Trim();
+                        command.ExecuteNonQuery();
+                    }
+
+                    con.Close();
                 }
                 return 1;
             }

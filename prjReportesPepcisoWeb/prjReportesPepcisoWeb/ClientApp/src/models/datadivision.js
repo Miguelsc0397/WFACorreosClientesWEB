@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var DataPendiente = /** @class */ (function () {
-    function DataPendiente() {
+var DataDivision = /** @class */ (function () {
+    function DataDivision() {
     }
-    return DataPendiente;
+    return DataDivision;
 }());
-exports.DataPendiente = DataPendiente;
-//# sourceMappingURL=datapendiente.js.map
+exports.DataDivision = DataDivision;
+//# sourceMappingURL=datadivision.js.map

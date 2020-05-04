@@ -29,8 +29,11 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
     public rfcList: ClientesRFC[];
     public facturaList: FacturasRFC[];
     public facturaForm: FormGroup;
+    public listaU: Array<FacturasRFC> = [];
     public seleccionados: Array<FacturasRFC> = [];
     public divisionForm: FormGroup;
+    public factura: string;
+    public facturasrfc: FacturasRFC;
     selectedDay: string = '';
     @ViewChild('fondovalor') fondovalor: ElementRef;
     @ViewChild('division') division: ElementRef;
@@ -133,14 +136,40 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
     RowSelected(u: any) {
         //this.selectedUser = u;   // declare variable in component.
         console.log(u);
+        //var factura = u.find(x => x.factura).factura;
+        //console.log(factura);
         this.seleccionados.push(u);
-        console.log(this.seleccionados);
+        // console.log(this.seleccionados);
+        var factura = u.factura;
+        console.log(factura);
+        //this.listaU.push(u);
 
-        //if (this.seleccionados.length >= 2) {
+        //$('table').each(function () {
+        //    var currentSelect = $(this);
+        //    // ... do your thing ;-)
+        //});
 
+        //console.log(this.seleccionados.includes('010M22642'));
+
+        //if (this.seleccionados.includes(u.factura)) {
+        //    alert("existe");
         //} else {
-        //    this.seleccionados.length = 0;
+        //    alert("no existe");
+        //    this.seleccionados.push(u);
         //}
+        //var busqueda = this.listaU.find(e => e.factura === factura);
+
+        //console.log(busqueda);
+        
+        //console.log(factura);
+        //console.log(this.listaU);
+
+        //if (this.listaU.indexOf(factura) !== -1) {
+        //    alert("el valor existe");
+        //} else {
+        //    alert("el valor no existe");
+        //}
+        
     }
 
     respuestaPend(respuesta: DataPendiente) {
@@ -182,15 +211,6 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
         console.log(this.selectedDay);
     }
 
-    //checkuncheckall() {
-    //    if (this.isChecked == true) {
-    //        this.isChecked = false;
-    //    }
-    //    else {
-    //        this.isChecked = true;
-    //    }
-
-    //}
 
     cambiosAplicar() {
         
@@ -204,25 +224,48 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
         const valueRfc = this.rfc.nativeElement.value;
         console.log(valueInput);
         console.log(valueRfc);
-        
-        if (this.seleccionados.length < 2) {
-            //alert("debes seleccionador al menos 2 facturas");
-            this.showNotification('top', 'right', 'Debes seleccionador al menos 2 facturas', 'warning');
+
+        var table = $('#example').DataTable();
+        var rows = table.rows({ selected: true }).data().toArray();
+
+        if (rows.length < 2) {
+            this.showNotification('top', 'right', 'Debes seleccionar al menos 2 facturas', 'warning');
 
         } else {
             if (this.f.division.value == "") {
-                this.showNotification('top', 'right', 'Debes seleccionador la division', 'warning');
+                this.showNotification('top', 'right', 'Debes seleccionar la division', 'warning');
             } else {
-                const dialogRef = this.dialog.open(ConfirmacionDivisionComponent, {
-                    width: '530px',
-                    data: {
-                        division: this.f.division.value,
-                        cliente: valueInput,
-                        rfc: valueRfc,
-                        seleccionados: this.seleccionados
-                        //opcion: respuesta.opcion
-                    }
-                });
+
+                    rows.forEach(function (entry) {
+                        //this.sum += entry;
+                        //++this.count;
+                        console.log(entry);
+                        this.facturasrfc = new FacturasRFC;
+                        this.facturasrfc.cliente = entry[0];
+                        this.facturasrfc.nombre = entry[1];
+                        this.facturasrfc.factura = entry[2];
+                        this.facturasrfc.division = entry[3];
+                        this.facturasrfc.uuid = entry[4];
+                        this.facturasrfc.total = Number(entry[5]);
+                        this.facturasrfc.moneda = entry[6];
+                        this.facturasrfc.fecha_factura = entry[7];
+                        this.facturasrfc.hora_factura = entry[8];
+                        this.facturasrfc.folio = Number(entry[9]);
+
+                        this.seleccionados.push(this.facturasrfc);
+                        console.log(this.seleccionados);
+                    }, this);
+
+                    const dialogRef = this.dialog.open(ConfirmacionDivisionComponent, {
+                        width: '530px',
+                        data: {
+                            division: this.f.division.value,
+                            cliente: valueInput,
+                            rfc: valueRfc,
+                            seleccionados: this.seleccionados
+                        }
+                    });
+                
             }
         }
         
@@ -236,10 +279,6 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
         //    }        
         //}
         
-    }
-
-    opcionSi() {
-        alert("si llega aqui");
     }
 
 
