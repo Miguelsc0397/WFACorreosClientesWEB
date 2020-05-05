@@ -50,7 +50,6 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
         private _facturasrfcService: FacturasRFCService, notifier: NotifierService, public dialog: MatDialog) {
         this.notifier = notifier;
     }
-    isChecked = false;
 
     ngAfterViewInit(): void {
         this.dtTrigger.next();
@@ -133,44 +132,44 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
     get g() { return this.facturaForm.controls; }
     get f() { return this.divisionForm.controls; }
 
-    RowSelected(u: any) {
-        //this.selectedUser = u;   // declare variable in component.
-        console.log(u);
-        //var factura = u.find(x => x.factura).factura;
-        //console.log(factura);
-        this.seleccionados.push(u);
-        // console.log(this.seleccionados);
-        var factura = u.factura;
-        console.log(factura);
-        //this.listaU.push(u);
+    //RowSelected(u: any) {
+    //    this.selectedUser = u;   // declare variable in component.
+    //    console.log(u);
+    //    var factura = u.find(x => x.factura).factura;
+    //    console.log(factura);
+    //    this.seleccionados.push(u);
+    //     console.log(this.seleccionados);
+    //    var factura = u.factura;
+    //    console.log(factura);
+    //    this.listaU.push(u);
 
-        //$('table').each(function () {
-        //    var currentSelect = $(this);
-        //    // ... do your thing ;-)
-        //});
+    //    $('table').each(function () {
+    //        var currentSelect = $(this);
+    //        // ... do your thing ;-)
+    //    });
 
-        //console.log(this.seleccionados.includes('010M22642'));
+    //    console.log(this.seleccionados.includes('010M22642'));
 
-        //if (this.seleccionados.includes(u.factura)) {
-        //    alert("existe");
-        //} else {
-        //    alert("no existe");
-        //    this.seleccionados.push(u);
-        //}
-        //var busqueda = this.listaU.find(e => e.factura === factura);
+    //    if (this.seleccionados.includes(u.factura)) {
+    //        alert("existe");
+    //    } else {
+    //        alert("no existe");
+    //        this.seleccionados.push(u);
+    //    }
+    //    var busqueda = this.listaU.find(e => e.factura === factura);
 
-        //console.log(busqueda);
+    //    console.log(busqueda);
         
-        //console.log(factura);
-        //console.log(this.listaU);
+    //    console.log(factura);
+    //    console.log(this.listaU);
 
-        //if (this.listaU.indexOf(factura) !== -1) {
-        //    alert("el valor existe");
-        //} else {
-        //    alert("el valor no existe");
-        //}
+    //    if (this.listaU.indexOf(factura) !== -1) {
+    //        alert("el valor existe");
+    //    } else {
+    //        alert("el valor no existe");
+    //    }
         
-    }
+    //}
 
     respuestaPend(respuesta: DataPendiente) {
         const dialogRef = this.dialog.open(ModalAplicacionesPendientesComponent, {
@@ -193,7 +192,7 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
             } else {
                 if (result == 'cancelar') {
                     const dialogRefCan = this.dialog.open(CancelacionPendientesComponent, {
-                        width: '530px',
+                        width: '400px',
                         data: {
                             opcion: respuesta.opcion
                         }
