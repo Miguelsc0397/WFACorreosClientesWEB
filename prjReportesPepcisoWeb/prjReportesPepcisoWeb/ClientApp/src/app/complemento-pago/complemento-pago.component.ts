@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientesRFC } from '../../models/clientesrfc';
 import { ClientesRFCService } from '../services/clientesrfc.service';
@@ -16,14 +16,20 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 declare var $: any;
 
 @Component({
-  selector: 'app-complemento-pago',
-  templateUrl: './complemento-pago.component.html',
-  styleUrls: ['./complemento-pago.component.scss']
+    selector: 'app-complemento-pago',
+    templateUrl: './complemento-pago.component.html',
+    styleUrls: ['./complemento-pago.component.scss']
 })
 export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnInit {
 
-    @ViewChild(DataTableDirective)
-    dtElement: DataTableDirective;
+    //@ViewChildren(DataTableDirective)
+    //tables: QueryList<DataTableDirective>;
+    //@ViewChild(DataTableDirective)
+    //dtElement: DataTableDirective;
+    @ViewChildren(DataTableDirective)
+    dtElement: QueryList<DataTableDirective>;
+    dtOptions: DataTables.Settings = {};
+    dtTrigger: Subject<any> = new Subject();
     private notifier: NotifierService;
     submitted = false;
     public rfcList: ClientesRFC[];
@@ -34,17 +40,14 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
     public divisionForm: FormGroup;
     public factura: string;
     public facturasrfc: FacturasRFC;
-    selectedDay: string = '';
+    selectedCliente: string = '';
     @ViewChild('fondovalor') fondovalor: ElementRef;
     @ViewChild('division') division: ElementRef;
     @ViewChild('rfc') rfc: ElementRef;
     @ViewChild('content') content: any;
-    display = 'none'; //default Variable
-    
+    isDtInitialized: boolean = false;
 
-    dtTrigger: Subject<any> = new Subject();
     selectedUser: any;
-
 
     constructor(private formBuilder: FormBuilder, private _clientesrfcService: ClientesRFCService,
         private _facturasrfcService: FacturasRFCService, notifier: NotifierService, public dialog: MatDialog) {
@@ -55,19 +58,39 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
         this.dtTrigger.next();
     }
 
+
+    //rerender(): void {
+    //    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    //        // Destroy the table first
+
+    //        //var table = $('#favoriteTable').DataTable();
+
+    //        //table.destroy();
+
+    //        dtInstance.destroy();
+    //        // Call the dtTrigger to rerender again
+    //        this.dtTrigger.next();
+    //    });
+    //}
+
     ngOnDestroy(): void {
         // Do not forget to unsubscribe the event
         this.dtTrigger.unsubscribe();
     }
 
-    rerender(): void {
-        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-            // Destroy the table first
-            dtInstance.destroy();
-            // Call the dtTrigger to rerender again
-            this.dtTrigger.next();
-        });
-    }
+    //rerender(): void {
+    //    if ("dtInstance" in this.dtElement) {
+    //        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    //            // Destroy the table first
+    //            dtInstance.destroy();
+    //            // Call the dtTrigger to rerender again
+    //            this.dtTrigger.next();
+    //        });
+    //    }
+    //    else {
+    //        this.dtTrigger.next();
+    //    }
+    //}
 
     showNotification(from, align, message, color) {
         const type = ['', 'info', 'success', 'warning', 'danger'];
@@ -86,23 +109,7 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
         });
     }
 
-    title = 'angulardatatables';
-    dtOptions: DataTables.Settings = {};
-
     ngOnInit() {
-        this._clientesrfcService.paramPago().subscribe(
-            (data: ClientesRFC[]) => this.rfcList = data);
-
-        this.divisionForm = this.formBuilder.group({
-            cliente: [''],
-            division: ['', Validators.required]
-        }, {
-        });
-
-        this.facturaForm = this.formBuilder.group({
-            opcion: ['', Validators.required]
-        }, {
-        });
 
         this.dtOptions = {
             pagingType: 'full_numbers',
@@ -111,6 +118,7 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
             scrollY: "280",
             scrollX: true,
             select: true,
+            destroy: true,
             language: {
                 search: "Buscar:",
                 lengthMenu: "Mostrar _MENU_ elementos",
@@ -126,6 +134,20 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
                 }
             }
         };
+
+        this._clientesrfcService.paramPago().subscribe(
+            (data: ClientesRFC[]) => this.rfcList = data);
+
+        this.divisionForm = this.formBuilder.group({
+            cliente: [''],
+            division: ['', Validators.required]
+        }, {
+        });
+
+        this.facturaForm = this.formBuilder.group({
+            opcion: ['', Validators.required]
+        }, {
+        });
 
     }
 
@@ -159,7 +181,7 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
     //    var busqueda = this.listaU.find(e => e.factura === factura);
 
     //    console.log(busqueda);
-        
+
     //    console.log(factura);
     //    console.log(this.listaU);
 
@@ -168,15 +190,16 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
     //    } else {
     //        alert("el valor no existe");
     //    }
-        
+
     //}
 
     respuestaPend(respuesta: DataPendiente) {
+
         const dialogRef = this.dialog.open(ModalAplicacionesPendientesComponent, {
             width: '530px',
             data: {
                 opcion: respuesta.opcion
-            }         
+            }
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -197,22 +220,29 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
                             opcion: respuesta.opcion
                         }
                     });
-                }              
+                    dialogRefCan.afterClosed().subscribe(result => {
+
+                        console.log(result);
+                        this.showFacturas();
+                    });
+
+                }
             }
+           // this.showFacturas();
         });
     }
 
     callValue($event) {
         let text = $event.target.options[$event.target.options.selectedIndex].text;
         text = text.substring(16, 24);
-        this.selectedDay = text;
+        this.selectedCliente = text;
 
-        console.log(this.selectedDay);
+        console.log(this.selectedCliente);
     }
 
 
     cambiosAplicar() {
-        
+
         //this.submitted = true;
 
         //if (this.divisionForm.invalid) {
@@ -235,80 +265,135 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
                 this.showNotification('top', 'right', 'Debes seleccionar la division', 'warning');
             } else {
 
-                    rows.forEach(function (entry) {
-                        //this.sum += entry;
-                        //++this.count;
-                        console.log(entry);
-                        this.facturasrfc = new FacturasRFC;
-                        this.facturasrfc.cliente = entry[0];
-                        this.facturasrfc.nombre = entry[1];
-                        this.facturasrfc.factura = entry[2];
-                        this.facturasrfc.division = entry[3];
-                        this.facturasrfc.uuid = entry[4];
-                        this.facturasrfc.total = Number(entry[5]);
-                        this.facturasrfc.moneda = entry[6];
-                        this.facturasrfc.fecha_factura = entry[7];
-                        this.facturasrfc.hora_factura = entry[8];
-                        this.facturasrfc.folio = Number(entry[9]);
+                rows.forEach(function (entry) {
+                    console.log(entry);
+                    this.facturasrfc = new FacturasRFC;
+                    this.facturasrfc.cliente = entry[0];
+                    this.facturasrfc.nombre = entry[1];
+                    this.facturasrfc.factura = entry[2];
+                    this.facturasrfc.division = entry[3];
+                    this.facturasrfc.uuid = entry[4];
+                    this.facturasrfc.total = Number(entry[5]);
+                    this.facturasrfc.moneda = entry[6];
+                    this.facturasrfc.fecha_factura = entry[7];
+                    this.facturasrfc.hora_factura = entry[8];
+                    this.facturasrfc.folio = Number(entry[9]);
 
-                        this.seleccionados.push(this.facturasrfc);
-                        console.log(this.seleccionados);
-                    }, this);
+                    this.seleccionados.push(this.facturasrfc);
+                    console.log(this.seleccionados);
+                }, this);
 
-                    const dialogRef = this.dialog.open(ConfirmacionDivisionComponent, {
-                        width: '530px',
-                        data: {
-                            division: this.f.division.value,
-                            cliente: valueInput,
-                            rfc: valueRfc,
-                            seleccionados: this.seleccionados
-                        }
-                    });
-                
+                const dialogRef = this.dialog.open(ConfirmacionDivisionComponent, {
+                    width: '530px',
+                    data: {
+                        division: this.f.division.value,
+                        cliente: valueInput,
+                        rfc: valueRfc,
+                        seleccionados: this.seleccionados
+                    }
+                });
+
+                dialogRef.afterClosed().subscribe(result => {
+
+                    console.log(result);
+                     this.showFacturas();
+                });
             }
         }
-        
-        //if (this.seleccionados.length < 2) {
-        //    this.showNotification('top', 'right', 'Debes seleccionador al menos 2 facturas', 'warning');
-        //} else {
-        //    if (this.f.division.value == "") {
-        //        alert("viene vacio");
-        //    } else {
-        //        $("#myModal").modal('show');
-        //    }        
-        //}
-        
+
     }
 
-
-    onSubmit() {
-        this.submitted = true;
-
-        //this._facturasrfcService.paramFactura(this.facturaForm.value).subscribe(
-        //    (data: FacturasRFC[]) => this.facturaList = data);
-
+    showFacturas() {
 
         this._facturasrfcService.paramFactura(this.facturaForm.value).subscribe((data: FacturasRFC[]) => {
-            if (data != null && data.length > 0) {
-                this.facturaList = data;
-            } else {
-                this.facturaList = data;
-                this.showNotification('top', 'right', 'No se mostraron facturas del cliente seleccionado', 'warning');
+
+            let retrievedCards = [];
+            for (let rfc of data) {
+                retrievedCards.push(rfc);
             }
-            // This log is never executed even when the update is successful
+
+            if (!this.facturaList) {
+                this.facturaList = retrievedCards;
+                this.facturaList['currentSet'] = name;
+                setTimeout(() => {
+                    this.dtTrigger.next();
+                });
+            } else {
+                this.dtElement.forEach(table => {
+                    if (table.dtTrigger) {
+                        table.dtInstance.then((dt: DataTables.Api) => {
+                            dt.destroy();
+                            this.facturaList = retrievedCards;
+                            this.facturaList['currentSet'] = name;
+                            setTimeout(() => {
+                                this.dtTrigger.next();
+                            });
+                        });
+                    }
+                });
+            }
+            if (retrievedCards.length <= 0) {
+                this.showNotification('top', 'right', 'No se mostraron facturas del cliente seleccionado', 'warning');
+
+            }
+            //if (data != null && data.length > 0) {
+            //    this.facturaList = data;
+            //    console.log(this.facturaList);
+            //    setTimeout(() => {
+            //        this.dtTrigger.next();
+            //    });
+            //    // ADD THIS
+            //    //this.dtTrigger.next();
+            //    //this.rerender();
+            //} else {
+            //    this.facturaList = data;
+            //    this.showNotification('top', 'right', 'No se mostraron facturas del cliente seleccionado', 'warning');
+            //}
         }, error => {
             console.log(error);
         });
+    }
+
+    apliPendientes() {
 
         this._facturasrfcService.aplicacionesPend(this.facturaForm.value)
             .subscribe((data: DataPendiente) => {
                 if (data.opcion != "") {
                     this.respuestaPend(data);
                 } else {
-
+                    $('#submitBtn').prop('disabled', false);
                 }
                 console.log(data);
             }, error => console.error(error));
+    }
+
+    onSubmit() {
+        this.submitted = true;
+
+        //this._facturasrfcService.paramFactura(this.facturaForm.value).subscribe((data: FacturasRFC[]) => {
+        //    if (data != null && data.length > 0) {
+        //        this.facturaList = data;
+        //    } else {
+        //        this.facturaList = data;
+        //        this.showNotification('top', 'right', 'No se mostraron facturas del cliente seleccionado', 'warning');
+        //    }
+        //}, error => {
+        //    console.log(error);
+        //});
+
+        this.showFacturas();
+
+        //this._facturasrfcService.aplicacionesPend(this.facturaForm.value)
+        //    .subscribe((data: DataPendiente) => {
+        //        if (data.opcion != "") {
+        //            this.respuestaPend(data);
+        //        } else {
+
+        //        }
+        //        console.log(data);
+        //    }, error => console.error(error));
+
+        this.apliPendientes();
     }
 
 }

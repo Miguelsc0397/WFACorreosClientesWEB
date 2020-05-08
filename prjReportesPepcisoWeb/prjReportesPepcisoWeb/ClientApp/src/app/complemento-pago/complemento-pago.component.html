@@ -17,15 +17,12 @@
         </div>
     </form>
 
-    <!--<button class="btn btn-info btn-fill" (click)="rerender()">
-        Rerender
-    </button>-->
 
     <div class="row">
         <div class="col-md-12">
             <div class="card card-plain">
                 <div class="content table-responsive table-full-width">
-                    <table id="example" datatable [dtOptions]="dtOptions" class="row-border hover" style="width:100%" *ngIf="facturaList">
+                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="example" class="row-border hover" style="width:100%" *ngIf="facturaList">
 
                         <thead>
                             <tr>
@@ -64,7 +61,7 @@
                 <div style="text-align: left;">
                     <div class="form-group">
                         <label style="font-weight: normal !important;">Nuevo Cliente</label>&nbsp;
-                        <input class="form-control" formControlName="cliente" #fondovalor readonly [value]="selectedDay" />&nbsp;
+                        <input class="form-control" formControlName="cliente" #fondovalor readonly [value]="selectedCliente" />&nbsp;
                         <label style="font-weight: normal !important;">Nueva Divisi&oacute;n</label>&nbsp;
                         <select class="form-control" formControlName="division" #division>
                             <option selected disabled hidden style='display: none' value=''></option>
@@ -76,7 +73,7 @@
                             Divisi&oacute;n requerido
                         </div>-->
                         <div class="form-group">
-                            <button class="btn btn-info btn-fill" (click)="cambiosAplicar()">Aplicar Cambio Cliente</button>
+                            <button class="btn btn-info btn-fill" id='submitBtn' disabled='disabled' (click)="cambiosAplicar()">Aplicar Cambio Cliente</button>
                         </div>
                     </div>
                 </div>
