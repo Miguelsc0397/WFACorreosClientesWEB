@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { ClientesFiltro } from '../../models/clientesfiltro';
@@ -6,6 +6,9 @@ import { ClientesFiltroService } from '../services/clientesfiltro.service';
 import { ConfirmacionEditComponent } from '../confirmacion-edit/confirmacion-edit.component';
 import { ModalEditClientescorreosComponent } from '../modal-edit-clientescorreos/modal-edit-clientescorreos.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
+import { NotifierService } from 'angular-notifier';
 
 declare var $: any
 
@@ -14,7 +17,7 @@ declare var $: any
   templateUrl: './clientes-filtro.component.html',
   styleUrls: ['./clientes-filtro.component.scss']
 })
-export class ClientesFiltroComponent implements OnInit {
+export class ClientesFiltroComponent implements AfterViewInit, OnDestroy, OnInit {
 
     
     filtroForm: FormGroup;
@@ -22,26 +25,43 @@ export class ClientesFiltroComponent implements OnInit {
     public filtroList: ClientesFiltro[];
     public correosList: ClientesFiltro[];
     public parametros: ClientesFiltro = new ClientesFiltro;
+    @ViewChildren(DataTableDirective)
+    dtElement: QueryList<DataTableDirective>;
+    dtOptions: DataTables.Settings = {};
+    dtTrigger: Subject<any> = new Subject();
+    private notifier: NotifierService;
 
     constructor(private formBuilder: FormBuilder, private _clientesService: ClientesFiltroService, public dialog: MatDialog,
-        private _router: Router) {
-        
+        private _router: Router, notifier: NotifierService) {
+        this.notifier = notifier;
          }
 
     title = 'angulardatatables';
-    dtOptions: any = {};
 
-    //openDialog(): void {
-    //    const dialogref = this.dialog.open(ConfirmacionEditComponent, {
-    //        width: '270px',
-    //        //data: "Se limpiará el resultado de la consulta, ¿ desea continuar ?",
+    showNotification(from, align, message, color) {
+        const type = ['', 'info', 'success', 'warning', 'danger'];
 
-    //    });
+        $.notify({
+            icon: "pe-7s-check",
+            message: message
+        }, {
+            type: color,
+            timer: 1000,
+            placement: {
+                from: from,
+                align: align
+            }
+        });
+    }
 
-    //    dialogref.afterClosed().subscribe(result => {
-    //        //this.onEnviar();
-    //    });
-    //}
+    ngAfterViewInit(): void {
+        this.dtTrigger.next();
+    }
+
+    ngOnDestroy(): void {
+        // Do not forget to unsubscribe the event
+        this.dtTrigger.unsubscribe();
+    }
 
     someClickHandler(info: any): void {
         this.parametros.clave_cliente = info.clave_cliente;
@@ -72,27 +92,28 @@ export class ClientesFiltroComponent implements OnInit {
             console.log(res.data)
      
             if (res.data != null) {
-                this.filtroList = this.filtroList.filter((value, key) => {
-                    if (value.clave_cliente == res.data.numerocliente) {
-                        value.correos_cliente = res.data.correosnuevos;
-                        if (res.data.pagos == true) {
-                            value.pagos_anticipados = "SI";
-                        } else {
-                            value.pagos_anticipados = "";
-                        }
+
+                this.refreshDatatable();
+                this.showNotification('top', 'right', 'Datos actualizados', 'success');
+                //this.filtroList = this.filtroList.filter((value, key) => {
+                //    if (value.clave_cliente == res.data.numerocliente) {
+                //        value.correos_cliente = res.data.correosnuevos;
+                //        if (res.data.pagos == true) {
+                //            value.pagos_anticipados = "SI";
+                //        } else {
+                //            value.pagos_anticipados = "";
+                //        }
                         
-                    }
-                    return true;
-                });
+                //    }
+                //    return true;
+                //});
             }
-            // received data from confirm-component
         })
     }
     
     ngOnInit() {
 
-        this._clientesService.paramFiltroNull().subscribe(
-            (data: ClientesFiltro[]) => this.filtroList = data);
+        this.refreshDatatable();
 
         this.filtroForm = this.formBuilder.group({
             filtro: [''],
@@ -104,8 +125,9 @@ export class ClientesFiltroComponent implements OnInit {
             pagingType: 'full_numbers',
             pageLength: 100,
             processing: true,
-            scrollY: "300",
+            scrollY: "380",
             scrollX: true,
+            destroy: true,
             responsive: true,
             language: {
                 search: "Buscar:",
@@ -121,33 +143,80 @@ export class ClientesFiltroComponent implements OnInit {
 
                 }
             }
-            //rowCallback: (row: Node, data: any[] | Object, index: number) => {
-            //    const self = this;
-            //    $('td', row).unbind('dblclick');
-            //    $('td', row).bind('dblclick', () => {
-            //        self.someClickHandler(data);
-            //    });
-            //    return row;
-            //}
-
         };
-
-        //$(document).on('click', '.getDetails', function () {
-        //    $("#myModal").modal('show');
-        //});
-
     }
 
     get f() { return this.filtroForm.controls; }
 
+    refreshDatatable() {
+
+        this._clientesService.paramFiltroNull().subscribe((data: ClientesFiltro[]) => {
+
+            let retrievedCards = [];
+            for (let rfc of data) {
+                retrievedCards.push(rfc);
+            }
+
+            if (!this.filtroList) {
+                this.filtroList = retrievedCards;
+                this.filtroList['currentSet'] = name;
+                setTimeout(() => {
+                    this.dtTrigger.next();
+                });
+            } else {
+                this.dtElement.forEach(table => {
+                    if (table.dtTrigger) {
+                        table.dtInstance.then((dt: DataTables.Api) => {
+                            dt.destroy();
+                            this.filtroList = retrievedCards;
+                            this.filtroList['currentSet'] = name;
+                            setTimeout(() => {
+                                this.dtTrigger.next();
+                            });
+                        });
+                    }
+                });
+            }
+        }, error => {
+            console.log(error);
+        });
+
+    }
 
     onSubmit() {
         this.submitted = true;
 
-        this._clientesService.paramFiltro(this.filtroForm.value).subscribe(
-            (data: ClientesFiltro[]) => this.filtroList = data);
+        this._clientesService.paramFiltro(this.filtroForm.value).subscribe((data: ClientesFiltro[]) => {
 
-      
+            let retrievedCards = [];
+            for (let rfc of data) {
+                retrievedCards.push(rfc);
+            }
+
+            if (!this.filtroList) {
+                this.filtroList = retrievedCards;
+                this.filtroList['currentSet'] = name;
+                setTimeout(() => {
+                    this.dtTrigger.next();
+                });
+            } else {
+                this.dtElement.forEach(table => {
+                    if (table.dtTrigger) {
+                        table.dtInstance.then((dt: DataTables.Api) => {
+                            dt.destroy();
+                            this.filtroList = retrievedCards;
+                            this.filtroList['currentSet'] = name;
+                            setTimeout(() => {
+                                this.dtTrigger.next();
+                            });
+                        });
+                    }
+                });
+            }
+
+        }, error => {
+            console.log(error);
+        }); 
     }
 
     

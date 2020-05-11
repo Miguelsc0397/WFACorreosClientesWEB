@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WFACorreosClientesWEB.service;
-using AutoMapper;
 
 namespace WFACorreosClientesWEB
 {
@@ -24,20 +22,10 @@ namespace WFACorreosClientesWEB
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IEmployee, EmployeeDataAccessLayer>();
-            services.AddTransient<IEmployeeService, SqlEmployeeService>();
-            services.AddTransient<IChecklistService, SqlChecklistService>();
-            services.AddTransient<IPepsicoService, SqlPepsicoService>();
-            services.AddTransient<IPepsico, PepsicoDataAccessLayer>();
-            services.AddTransient<IKOF, KOFDataAccessLayer>();
-            services.AddTransient<IHeineken_Desinstalaciones, HeinekenDesinDataAccessLayer>();
-            services.AddTransient<IHeinekenInstalaciones, HeinekenInstDataAccessLayer>();
-            services.AddTransient<IChecklistazul, ChecklistazulDataAccessLayer>();
             services.AddTransient<IClientesFiltro, ClientesFiltroDataAccessLayer>();
             services.AddTransient<IClientesRFC, ClientesRFCDataAccessLayer>();
             services.AddTransient<IFacturasRFC, FacturasRFCDataAccessLayer>();
             services.AddTransient<IUserLogin, UserLoginDataAccessLayer>();
-            services.AddAutoMapper(typeof(Startup));
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
 

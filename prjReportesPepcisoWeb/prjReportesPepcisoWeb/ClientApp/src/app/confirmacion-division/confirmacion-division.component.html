@@ -8,16 +8,7 @@
     <div class="row">
         <div class="col-md-12" style="text-align: right;">
             <button mat-button (click)="opcionSi()">Si</button>
-            <button mat-button (click)="opcionNo()">No</button>
+            <button mat-button (click)="dialogRef.close('no')">No</button>
         </div>
     </div>
 </div>
-
-<!--<form role="form" [formGroup]="divisionForm" style="display:none">
-        <input class="form-control" formControlName="cliente" #fondovalor readonly [value]="selectedDay" type="hidden" />
-        <select class="form-control" #division formControlName="division" style="visibility:hidden;">
-            <option selected disabled hidden style='display: none' value=''></option>
-            <option value="div01">01</option>
-            <option value="div03">03</option>
-        </select>
-</form>-->

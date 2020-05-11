@@ -19,7 +19,6 @@ export interface DialogData {
 })
 export class ConfirmacionDivisionComponent implements OnInit {
     public datadivision: DataDivision;
-    //public filial: string;
 
     constructor(public dialogRef: MatDialogRef<ConfirmacionDivisionComponent>,
         @Inject(MAT_DIALOG_DATA) public data: DialogData, private _facturasrfcService: FacturasRFCService,
@@ -48,11 +47,7 @@ export class ConfirmacionDivisionComponent implements OnInit {
                     const dialogRef = this.dialog.open(MensajeCambiodivisionComponent, {
                         width: '530px',
                         data: {
-                            //division: this.f.division.value,
-                            //cliente: valueInput,
-                            //rfc: valueRfc,
-                            //seleccionados: this.seleccionados
-                            ////opcion: respuesta.opcion
+
                         }
                     });
                 }

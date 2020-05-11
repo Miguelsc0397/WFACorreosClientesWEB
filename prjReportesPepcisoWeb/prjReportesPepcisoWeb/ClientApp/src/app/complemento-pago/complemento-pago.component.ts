@@ -22,10 +22,6 @@ declare var $: any;
 })
 export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnInit {
 
-    //@ViewChildren(DataTableDirective)
-    //tables: QueryList<DataTableDirective>;
-    //@ViewChild(DataTableDirective)
-    //dtElement: DataTableDirective;
     @ViewChildren(DataTableDirective)
     dtElement: QueryList<DataTableDirective>;
     dtOptions: DataTables.Settings = {};
@@ -58,44 +54,14 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
         this.dtTrigger.next();
     }
 
-
-    //rerender(): void {
-    //    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-    //        // Destroy the table first
-
-    //        //var table = $('#favoriteTable').DataTable();
-
-    //        //table.destroy();
-
-    //        dtInstance.destroy();
-    //        // Call the dtTrigger to rerender again
-    //        this.dtTrigger.next();
-    //    });
-    //}
-
     ngOnDestroy(): void {
         // Do not forget to unsubscribe the event
         this.dtTrigger.unsubscribe();
     }
 
-    //rerender(): void {
-    //    if ("dtInstance" in this.dtElement) {
-    //        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-    //            // Destroy the table first
-    //            dtInstance.destroy();
-    //            // Call the dtTrigger to rerender again
-    //            this.dtTrigger.next();
-    //        });
-    //    }
-    //    else {
-    //        this.dtTrigger.next();
-    //    }
-    //}
-
     showNotification(from, align, message, color) {
         const type = ['', 'info', 'success', 'warning', 'danger'];
 
-        //var color = Math.floor((Math.random() * 4) + 1);
         $.notify({
             icon: "pe-7s-close-circle",
             message: message
@@ -154,44 +120,6 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
     get g() { return this.facturaForm.controls; }
     get f() { return this.divisionForm.controls; }
 
-    //RowSelected(u: any) {
-    //    this.selectedUser = u;   // declare variable in component.
-    //    console.log(u);
-    //    var factura = u.find(x => x.factura).factura;
-    //    console.log(factura);
-    //    this.seleccionados.push(u);
-    //     console.log(this.seleccionados);
-    //    var factura = u.factura;
-    //    console.log(factura);
-    //    this.listaU.push(u);
-
-    //    $('table').each(function () {
-    //        var currentSelect = $(this);
-    //        // ... do your thing ;-)
-    //    });
-
-    //    console.log(this.seleccionados.includes('010M22642'));
-
-    //    if (this.seleccionados.includes(u.factura)) {
-    //        alert("existe");
-    //    } else {
-    //        alert("no existe");
-    //        this.seleccionados.push(u);
-    //    }
-    //    var busqueda = this.listaU.find(e => e.factura === factura);
-
-    //    console.log(busqueda);
-
-    //    console.log(factura);
-    //    console.log(this.listaU);
-
-    //    if (this.listaU.indexOf(factura) !== -1) {
-    //        alert("el valor existe");
-    //    } else {
-    //        alert("el valor no existe");
-    //    }
-
-    //}
 
     respuestaPend(respuesta: DataPendiente) {
 
@@ -204,6 +132,11 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
 
         dialogRef.afterClosed().subscribe(result => {
 
+            if (result == 'no') {
+                this.showNotification('top', 'right', 'No es posible Consolidar mas Facturas para el Cliente actual', 'warning');
+                $('#submitBtn').prop('disabled', true);
+            }
+
             console.log(result);
             if (result == 'yes') {
                 const dialogRefCon = this.dialog.open(ConfirmacionPendientesComponent, {
@@ -212,6 +145,17 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
                         opcion: respuesta.opcion
                     }
                 });
+
+                dialogRefCon.afterClosed().subscribe(result => {
+                    if (result == 'no') {
+                        this.showNotification('top', 'right', 'No es posible Consolidar mas Facturas para el Cliente actual', 'warning');
+                        $('#submitBtn').prop('disabled', true);
+                    } else {
+                        
+                        $('#submitBtn').prop('disabled', false);
+                    }
+                });
+
             } else {
                 if (result == 'cancelar') {
                     const dialogRefCan = this.dialog.open(CancelacionPendientesComponent, {
@@ -221,14 +165,17 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
                         }
                     });
                     dialogRefCan.afterClosed().subscribe(result => {
-
-                        console.log(result);
-                        this.showFacturas();
+                        if (result == 'no') {
+                            this.showNotification('top', 'right', 'No es posible Consolidar mas Facturas para el Cliente actual', 'warning');
+                            $('#submitBtn').prop('disabled', true);
+                        } else {
+                            this.showFacturas();
+                            $('#submitBtn').prop('disabled', false);
+                        }                  
                     });
 
                 }
             }
-           // this.showFacturas();
         });
     }
 
@@ -243,11 +190,6 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
 
     cambiosAplicar() {
 
-        //this.submitted = true;
-
-        //if (this.divisionForm.invalid) {
-        //    return;
-        //}
         const valueInput = this.fondovalor.nativeElement.value;
         const valueDivision = this.division.nativeElement.value;
         const valueRfc = this.rfc.nativeElement.value;
@@ -296,7 +238,12 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
                 dialogRef.afterClosed().subscribe(result => {
 
                     console.log(result);
-                     this.showFacturas();
+                    if (result == 'no') {
+
+                    } else {                       
+                        this.showFacturas();
+                        $('#submitBtn').prop('disabled', true);
+                    }                  
                 });
             }
         }
@@ -336,19 +283,6 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
                 this.showNotification('top', 'right', 'No se mostraron facturas del cliente seleccionado', 'warning');
 
             }
-            //if (data != null && data.length > 0) {
-            //    this.facturaList = data;
-            //    console.log(this.facturaList);
-            //    setTimeout(() => {
-            //        this.dtTrigger.next();
-            //    });
-            //    // ADD THIS
-            //    //this.dtTrigger.next();
-            //    //this.rerender();
-            //} else {
-            //    this.facturaList = data;
-            //    this.showNotification('top', 'right', 'No se mostraron facturas del cliente seleccionado', 'warning');
-            //}
         }, error => {
             console.log(error);
         });
@@ -370,28 +304,7 @@ export class ComplementoPagoComponent implements AfterViewInit, OnDestroy, OnIni
     onSubmit() {
         this.submitted = true;
 
-        //this._facturasrfcService.paramFactura(this.facturaForm.value).subscribe((data: FacturasRFC[]) => {
-        //    if (data != null && data.length > 0) {
-        //        this.facturaList = data;
-        //    } else {
-        //        this.facturaList = data;
-        //        this.showNotification('top', 'right', 'No se mostraron facturas del cliente seleccionado', 'warning');
-        //    }
-        //}, error => {
-        //    console.log(error);
-        //});
-
         this.showFacturas();
-
-        //this._facturasrfcService.aplicacionesPend(this.facturaForm.value)
-        //    .subscribe((data: DataPendiente) => {
-        //        if (data.opcion != "") {
-        //            this.respuestaPend(data);
-        //        } else {
-
-        //        }
-        //        console.log(data);
-        //    }, error => console.error(error));
 
         this.apliPendientes();
     }

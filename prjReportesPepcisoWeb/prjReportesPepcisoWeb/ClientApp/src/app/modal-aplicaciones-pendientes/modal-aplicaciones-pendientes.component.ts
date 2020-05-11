@@ -23,7 +23,6 @@ export class ModalAplicacionesPendientesComponent implements OnInit {
     showNotification(from, align, message, color) {
         const type = ['', 'info', 'success', 'warning', 'danger'];
 
-        //var color = Math.floor((Math.random() * 4) + 1);
         $.notify({
             icon: "pe-7s-close-circle",
             message: message
@@ -40,13 +39,5 @@ export class ModalAplicacionesPendientesComponent implements OnInit {
   ngOnInit() {
   }
 
-    opcionSi() {
-        this.dialogRef.close({ data: this.data })
-    }
-
-    opcionNo() {
-        this.showNotification('top', 'right', 'No es posible Consolidar mas Facturas para el Cliente actual', 'warning');
-        this.dialogRef.close();
-    }
 
 }

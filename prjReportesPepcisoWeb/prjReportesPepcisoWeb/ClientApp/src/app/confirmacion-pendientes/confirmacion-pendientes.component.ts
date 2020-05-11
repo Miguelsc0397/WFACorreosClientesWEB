@@ -26,9 +26,8 @@ export class ConfirmacionPendientesComponent implements OnInit {
     showNotification(from, align, message, color) {
         const type = ['', 'info', 'success', 'warning', 'danger'];
 
-        //var color = Math.floor((Math.random() * 4) + 1);
         $.notify({
-            icon: "pe-7s-close-circle",
+            icon: "pe-7s-check",
             message: message
         }, {
             type: color,
@@ -39,6 +38,7 @@ export class ConfirmacionPendientesComponent implements OnInit {
             }
         });
     }
+
 
   ngOnInit() {
   }
@@ -54,11 +54,6 @@ export class ConfirmacionPendientesComponent implements OnInit {
                 }
                 
             }, error => console.error(error));
-    }
-
-    opcionNo() {
-        this.showNotification('top', 'right', 'No es posible Consolidar mas Facturas para el Cliente actual', 'warning');
-        this.dialogRef.close();
     }
 
 }
