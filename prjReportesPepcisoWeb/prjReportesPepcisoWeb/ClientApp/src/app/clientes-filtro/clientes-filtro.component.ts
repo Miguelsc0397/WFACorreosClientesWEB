@@ -69,7 +69,6 @@ export class ClientesFiltroComponent implements AfterViewInit, OnDestroy, OnInit
         this._clientesService.consultgarRFC(this.parametros)
             .subscribe((response: ClientesFiltro) => {
                 console.log(response);
-                //this.parametros = response;
                 this.show(response);
             }, error => console.error(error));
 
@@ -95,18 +94,6 @@ export class ClientesFiltroComponent implements AfterViewInit, OnDestroy, OnInit
 
                 this.refreshDatatable();
                 this.showNotification('top', 'right', 'Datos actualizados', 'success');
-                //this.filtroList = this.filtroList.filter((value, key) => {
-                //    if (value.clave_cliente == res.data.numerocliente) {
-                //        value.correos_cliente = res.data.correosnuevos;
-                //        if (res.data.pagos == true) {
-                //            value.pagos_anticipados = "SI";
-                //        } else {
-                //            value.pagos_anticipados = "";
-                //        }
-                        
-                //    }
-                //    return true;
-                //});
             }
         })
     }

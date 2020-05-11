@@ -18,18 +18,9 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 
 import { DataTablesModule } from 'angular-datatables';
-import { ExporterService } from '../../services/exporter.service';
-import { FetchPepsicoComponent } from '../../fetch-pepsico/fetch-pepsico.component';
-import { FetchKOFComponent } from '../../fetch-kof/fetch-kof.component';
-import { FetchHeinekenInstalacionesComponent } from '../../fetch-heineken-inst/fetch-heineken-inst.component';
-import { FetchHDesinstComponent } from '../../fetch-heineken-desinst/fetch-hdesinst.component';
-import { FetchChecklistazulComponent } from '../../fetch-checklistazul/fetch-checklistazul.component';
-import { FetchFormulariosComponent } from '../../fetch-formularios/fetch-formularios.component';
-import { FetchInicioCheckComponent } from '../../fetch-iniciocheck/fetch-iniciocheck.component';
 import { ClientesFiltroComponent } from '../../clientes-filtro/clientes-filtro.component';
 import { ComplementoPagoComponent } from '../../complemento-pago/complemento-pago.component';
 import { NotifierModule, NotifierOptions } from "angular-notifier";
-//import { LoginComponent } from '../../login/login.component';
 
 const customNotifierOptions: NotifierOptions = {
     position: {
@@ -93,17 +84,10 @@ const customNotifierOptions: NotifierOptions = {
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    FetchPepsicoComponent,
-    FetchKOFComponent,
-    FetchHeinekenInstalacionesComponent,
-    FetchHDesinstComponent,
-    FetchChecklistazulComponent,
-    FetchFormulariosComponent,
-    FetchInicioCheckComponent,
     ClientesFiltroComponent,
       ComplementoPagoComponent
     ],
-    providers: [ExporterService],
+    providers: [],
     exports: [RouterModule]
 })
 
