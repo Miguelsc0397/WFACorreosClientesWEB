@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PepsicoService } from '../services/pepsico.service';
-import { Pepsico } from '../../models/Pepsico';
+//import { Pepsico } from '../../models/Pepsico';
 
 @Component({
   selector: 'app-fetch-pepsico',
@@ -9,7 +9,7 @@ import { Pepsico } from '../../models/Pepsico';
 })
 export class FetchPepsicoComponent implements OnInit {
 
-  public pepsicoList: Pepsico[];
+  //public pepsicoList: Pepsico[];
 
   //load
   //constructor(private _pepsicoService: PepsicoService) {

@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PepsicoService } from '../services/pepsico.service';
+//import { PepsicoService } from '../services/pepsico.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Pepsico } from '../../models/Pepsico';
-import { Employee } from '../../models/employee';
-import { ExporterService } from '../services/exporter.service';
-import { KOF } from '../../models/kof';
-import { KOFService } from '../services/kof.service';
-import { HDesInstService } from '../services/hdesinst.service';
-import { Heineken_Desinstalaciones } from '../../models/heineken_desinst';
-import { HeinekenInstService } from '../services/heineken-inst.service';
-import { HeinekenInstalaciones } from '../../models/heineken_inst';
-import { MatDialog, MatDialogRef } from '@angular/material';
+//import { Pepsico } from '../../models/Pepsico';
+//import { Employee } from '../../models/employee';
+//import { ExporterService } from '../services/exporter.service';
+//import { KOF } from '../../models/kof';
+//import { KOFService } from '../services/kof.service';
+//import { HDesInstService } from '../services/hdesinst.service';
+//import { Heineken_Desinstalaciones } from '../../models/heineken_desinst';
+//import { HeinekenInstService } from '../services/heineken-inst.service';
+//import { HeinekenInstalaciones } from '../../models/heineken_inst';
+//import { MatDialog, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-fetch-formularios',
@@ -22,17 +22,17 @@ export class FetchFormulariosComponent implements OnInit {
 
   dataForm: FormGroup;
   submitted = false;
-  public pepsicoList: Pepsico[];
-  public empList: Employee[];
-  public kofList: KOF[];
-  public desinstList: Heineken_Desinstalaciones[];
-  public instList: HeinekenInstalaciones[];
+  //public pepsicoList: Pepsico[];
+  //public empList: Employee[];
+  //public kofList: KOF[];
+  //public desinstList: Heineken_Desinstalaciones[];
+  //public instList: HeinekenInstalaciones[];
   titledialog = 'angular-confirmation-dialog';
 
-  constructor(private formBuilder: FormBuilder, private _pepsicoService: PepsicoService,
-    private excelService: ExporterService, private _kofService: KOFService,
-      private _desinstalacionesService: HDesInstService, private _heinekenInstalacionesService: HeinekenInstService,
-      public dialog: MatDialog) { }
+  constructor(private formBuilder: FormBuilder/*, private _pepsicoService: PepsicoService,*/
+    //private excelService: ExporterService, private _kofService: KOFService,
+    //  private _desinstalacionesService: HDesInstService, private _heinekenInstalacionesService: HeinekenInstService,
+     /* public dialog: MatDialog*/) { }
 
     title = 'angulardatatables';
     dtOptions: DataTables.Settings = {};
@@ -115,82 +115,82 @@ export class FetchFormulariosComponent implements OnInit {
     isShown: boolean = false; // hidden by default
 
 
-  exportAsXLSX(): void {
+  //exportAsXLSX(): void {
 
-    if (this.dataForm.value["opcion"] == "Pepsico") {
+  //  if (this.dataForm.value["opcion"] == "Pepsico") {
 
-      this.excelService.exportToExcel(this.pepsicoList, 'Pepsico');
+  //    this.excelService.exportToExcel(this.pepsicoList, 'Pepsico');
 
-    } else {
-      if (this.dataForm.value["opcion"] == "KOF") {
+  //  } else {
+  //    if (this.dataForm.value["opcion"] == "KOF") {
 
-        this.excelService.exportToExcel(this.kofList, 'KOF');
+  //      this.excelService.exportToExcel(this.kofList, 'KOF');
 
-      } else {
-        if (this.dataForm.value["opcion"] == "Heineken") {
-          if (this.dataForm.value["radioParam"] == "instalaciones") {
+  //    } else {
+  //      if (this.dataForm.value["opcion"] == "Heineken") {
+  //        if (this.dataForm.value["radioParam"] == "instalaciones") {
             
-            this.excelService.exportToExcel(this.instList, 'Heineken_Instalaciones');
-          }
-        }
+  //          this.excelService.exportToExcel(this.instList, 'Heineken_Instalaciones');
+  //        }
+  //      }
 
-        if (this.dataForm.value["radioParam"] == "desinstalaciones") {
+  //      if (this.dataForm.value["radioParam"] == "desinstalaciones") {
           
-          this.excelService.exportToExcel(this.desinstList, 'Heineken_Desinstalaciones');
-        }
-      }
-    }
-  }
+  //        this.excelService.exportToExcel(this.desinstList, 'Heineken_Desinstalaciones');
+  //      }
+  //    }
+  //  }
+  //}
 
   get f() { return this.dataForm.controls; }
 
-  onSubmit() {
-    this.submitted = true;
+  //onSubmit() {
+  //  this.submitted = true;
 
-    if (this.dataForm.value["opcion"] == "Pepsico") {
+  //  if (this.dataForm.value["opcion"] == "Pepsico") {
 
-      this._pepsicoService.paramPepsico(this.dataForm.value).subscribe(
-        (data: Pepsico[]) => this.pepsicoList = data
-      );
+  //    this._pepsicoService.paramPepsico(this.dataForm.value).subscribe(
+  //      (data: Pepsico[]) => this.pepsicoList = data
+  //    );
 
-    } else {
-      if (this.dataForm.value["opcion"] == "KOF") {
+  //  } else {
+  //    if (this.dataForm.value["opcion"] == "KOF") {
 
-        this._kofService.paramKOF(this.dataForm.value).subscribe(
-          (data: KOF[]) => this.kofList = data
-        );
+  //      this._kofService.paramKOF(this.dataForm.value).subscribe(
+  //        (data: KOF[]) => this.kofList = data
+  //      );
 
-      } else {
-        if (this.dataForm.value["opcion"] == "Heineken") {
-          if (this.dataForm.value["radioParam"] == "instalaciones") {
+  //    } else {
+  //      if (this.dataForm.value["opcion"] == "Heineken") {
+  //        if (this.dataForm.value["radioParam"] == "instalaciones") {
 
-            this._heinekenInstalacionesService.paramInst(this.dataForm.value).subscribe(
-            (data: HeinekenInstalaciones[]) => this.instList = data
-          );
+  //          this._heinekenInstalacionesService.paramInst(this.dataForm.value).subscribe(
+  //          (data: HeinekenInstalaciones[]) => this.instList = data
+  //        );
 
-          }
-        }
+  //        }
+  //      }
 
-        if (this.dataForm.value["radioParam"] == "desinstalaciones") {
-          this._desinstalacionesService.paramDesinst(this.dataForm.value).subscribe(
-          (data: Heineken_Desinstalaciones[]) => this.desinstList = data
-        );
-        }
-      }
-      }
-    }
+  //      if (this.dataForm.value["radioParam"] == "desinstalaciones") {
+  //        this._desinstalacionesService.paramDesinst(this.dataForm.value).subscribe(
+  //        (data: Heineken_Desinstalaciones[]) => this.desinstList = data
+  //      );
+  //      }
+  //    }
+  //    }
+  //  }
 
   onReset() {
-    this.submitted = false;
-    this.pepsicoList = null;
-    this.kofList = null;
-    this.instList = null;
-    this.desinstList = null;
-    this.dataForm.reset();
-    this.ngOnInit();
-    $(document).ready(function () {
-      $("#opsheineken").hide();
-    });
+    //this.submitted = false;
+    //this.pepsicoList = null;
+    //this.kofList = null;
+    //this.instList = null;
+    //this.desinstList = null;
+    //this.dataForm.reset();
+    //this.ngOnInit();
+    //$(document).ready(function () {
+    //  $("#opsheineken").hide();
+    //});
     
     
   }

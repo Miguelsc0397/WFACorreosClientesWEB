@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { KOFService } from '../services/kof.service';
-import { KOF } from '../../models/kof';
+//import { KOF } from '../../models/kof';
 
 @Component({
   selector: 'app-fetch-kof',
@@ -9,7 +9,7 @@ import { KOF } from '../../models/kof';
 })
 export class FetchKOFComponent implements OnInit {
 
-  public kofList: KOF[];
+  //public kofList: KOF[];
 
   constructor(private _kofService: KOFService) {
     //this.getKOF();

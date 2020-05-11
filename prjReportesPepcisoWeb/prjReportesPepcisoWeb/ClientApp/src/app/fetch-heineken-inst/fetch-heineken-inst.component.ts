@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HeinekenInstService } from '../services/heineken-inst.service';
-import { HeinekenInstalaciones } from '../../models/heineken_inst';
+//import { HeinekenInstalaciones } from '../../models/heineken_inst';
 
 @Component({
   selector: 'app-fetch-hinstalaciones',
@@ -9,7 +9,7 @@ import { HeinekenInstalaciones } from '../../models/heineken_inst';
 })
 export class FetchHeinekenInstalacionesComponent implements OnInit {
 
-  public instList: HeinekenInstalaciones[];
+  //public instList: HeinekenInstalaciones[];
 
   constructor(private _heinekenInstalacionesService: HeinekenInstService) {
     //this.getInstal();

@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Pepsico } from '../../models/Pepsico';
-import { Data } from '../../models/data';
+//import { Pepsico } from '../../models/Pepsico';
+//import { Data } from '../../models/data';
 
 @Injectable({
   providedIn: 'root'
@@ -22,12 +22,12 @@ export class PepsicoService {
   //    }));
   //}
 
-  paramPepsico(data: Data) {
-    return this._http.post(this.myAppUrl + 'Index', data).pipe(map(
-      response => {
-        return response;
-      }));
-  }
+  //paramPepsico(data: Data) {
+  //  return this._http.post(this.myAppUrl + 'Index', data).pipe(map(
+  //    response => {
+  //      return response;
+  //    }));
+  //}
 
   //savePepsico(datapepsico: DataPepsico) {
   //  return this._http.post(this.myAppUrl + 'Index', datapepsico)

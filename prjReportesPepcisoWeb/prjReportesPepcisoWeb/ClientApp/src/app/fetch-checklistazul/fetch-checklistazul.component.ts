@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChecklistazulService } from '../services/checklistazul.service';
-import { Checklistazul } from '../..//models/checklistazul';
+//import { Checklistazul } from '../..//models/checklistazul';
 
 @Component({
   selector: 'app-fetch-checklistazul',
@@ -9,7 +9,7 @@ import { Checklistazul } from '../..//models/checklistazul';
 })
 export class FetchChecklistazulComponent implements OnInit {
 
-  public checkList: Checklistazul[];
+  //public checkList: Checklistazul[];
 
   constructor(private _checklistService: ChecklistazulService) {
     //this.getChecklist();

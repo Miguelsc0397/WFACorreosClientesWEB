@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app.routing';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { FooterModule } from './shared/footer/footer.module';
 import { SidebarModule } from './sidebar/sidebar.module';
-//import { ConfirmacionDialogoComponent } from './confirmacion-dialogo/confirmacion-dialogo.component';
 
 import { AppComponent } from './app.component';
 
@@ -83,7 +82,6 @@ const customNotifierOptions: NotifierOptions = {
     declarations: [
         AppComponent,
         AdminLayoutComponent,
-        //ConfirmacionDialogoComponent,
         ConfirmacionEditComponent,
         ModalEditClientescorreosComponent,
         ConfirmacionLogoutComponent,
@@ -95,7 +93,7 @@ const customNotifierOptions: NotifierOptions = {
     ],
     providers: [],
     bootstrap: [AppComponent],
-    entryComponents: [/*ConfirmacionDialogoComponent,*/ ConfirmacionEditComponent, ModalEditClientescorreosComponent, ConfirmacionLogoutComponent,
+    entryComponents: [ConfirmacionEditComponent, ModalEditClientescorreosComponent, ConfirmacionLogoutComponent,
         ModalAplicacionesPendientesComponent, ConfirmacionPendientesComponent, CancelacionPendientesComponent,
         ConfirmacionDivisionComponent, MensajeCambiodivisionComponent]
 })

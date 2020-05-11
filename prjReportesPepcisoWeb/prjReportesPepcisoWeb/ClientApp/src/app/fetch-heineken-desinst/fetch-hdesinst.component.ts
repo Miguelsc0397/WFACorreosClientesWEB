@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HDesInstService } from '../services/hdesinst.service';
-import { Heineken_Desinstalaciones } from '../../models/heineken_desinst';
+//import { Heineken_Desinstalaciones } from '../../models/heineken_desinst';
 
 @Component({
   selector: 'app-fetch-desinstalaciones',
@@ -9,7 +9,7 @@ import { Heineken_Desinstalaciones } from '../../models/heineken_desinst';
 })
 export class FetchHDesinstComponent implements OnInit {
 
-  public desinstList: Heineken_Desinstalaciones[];
+  //public desinstList: Heineken_Desinstalaciones[];
 
   constructor(private _desinstalacionesService: HDesInstService) {
     //this.getDesinstal();

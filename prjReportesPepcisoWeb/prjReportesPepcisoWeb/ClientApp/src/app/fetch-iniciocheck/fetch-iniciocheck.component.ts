@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ChecklistazulService } from '../services/checklistazul.service';
-import { Checklistazul } from '../../models/checklistazul';
+//import { Checklistazul } from '../../models/checklistazul';
 import { ExporterService } from '../services/exporter.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
 //import { ConfirmacionDialogoComponent } from '../confirmacion-dialogo/confirmacion-dialogo.component';
@@ -15,7 +15,7 @@ export class FetchInicioCheckComponent implements OnInit {
 
   checkForm: FormGroup;
   submitted = false;
-  public checkList: Checklistazul[];
+  //public checkList: Checklistazul[];
   titledialog = 'angular-confirmation-dialog';
 
 
@@ -56,25 +56,25 @@ export class FetchInicioCheckComponent implements OnInit {
 
   }
 
-  onExportar() {
-    this.excelService.exportToExcel(this.checkList, 'Checklist_azul');
-  }
+  //onExportar() {
+  //  this.excelService.exportToExcel(this.checkList, 'Checklist_azul');
+  //}
 
   get f() { return this.checkForm.controls; }
 
   onSubmit() {
     this.submitted = true;
-    this.checkList = null;
+    //this.checkList = null;
     
-    this._checklistService.paramChecklist(this.checkForm.value).subscribe(
-      (data: Checklistazul[]) => this.checkList = data
-    );
+    //this._checklistService.paramChecklist(this.checkForm.value).subscribe(
+    //  (data: Checklistazul[]) => this.checkList = data
+    //);
 
   }
 
   onReset() {
     this.submitted = false;
-    this.checkList = null;
+    //this.checkList = null;
     this.checkForm.reset();
     this.ngOnInit();
   }

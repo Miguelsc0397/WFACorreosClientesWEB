@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Heineken_Desinstalaciones } from '../../models/heineken_desinst';
-import { Data } from '../../models/data';
+//import { Heineken_Desinstalaciones } from '../../models/heineken_desinst';
+//import { Data } from '../../models/data';
 
 @Injectable({
   providedIn: 'root'
@@ -22,12 +22,12 @@ export class HDesInstService {
   //    }));
   //}
 
-  paramDesinst(data: Data) {
-    return this._http.post(this.myAppUrl + 'Index', data).pipe(map(
-      response => {
-        return response;
-      }));
-  }
+  //paramDesinst(data: Data) {
+  //  return this._http.post(this.myAppUrl + 'Index', data).pipe(map(
+  //    response => {
+  //      return response;
+  //    }));
+  //}
 
 
   

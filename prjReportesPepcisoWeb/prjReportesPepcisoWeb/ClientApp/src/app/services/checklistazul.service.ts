@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Checklistazul } from '../../models/checklistazul';
-import { DataCheck } from '../../models/datacheck';
+//import { Checklistazul } from '../../models/checklistazul';
+//import { DataCheck } from '../../models/datacheck';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +15,12 @@ export class ChecklistazulService {
     this.myAppUrl = baseUrl + 'api/Checklistazul/';
   }
 
-  paramChecklist(datacheck: DataCheck) {
-    return this._http.post(this.myAppUrl + 'Index', datacheck).pipe(map(
-      response => {
-        return response;
-      }));
-  }
+  //paramChecklist(datacheck: DataCheck) {
+  //  return this._http.post(this.myAppUrl + 'Index', datacheck).pipe(map(
+  //    response => {
+  //      return response;
+  //    }));
+  //}
 
   //getChecklist() {
   //  return this._http.get(this.myAppUrl + 'Index').pipe(map(
