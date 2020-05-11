@@ -12,7 +12,6 @@ import { Heineken_Desinstalaciones } from '../../models/heineken_desinst';
 import { HeinekenInstService } from '../services/heineken-inst.service';
 import { HeinekenInstalaciones } from '../../models/heineken_inst';
 import { MatDialog, MatDialogRef } from '@angular/material';
-import { ConfirmacionDialogoComponent } from '../confirmacion-dialogo/confirmacion-dialogo.component';
 
 @Component({
   selector: 'app-fetch-formularios',
@@ -40,17 +39,6 @@ export class FetchFormulariosComponent implements OnInit {
     get parameter1(): any { return this.dataForm.get('parameter1'); }
     get parameter2(): any { return this.dataForm.get('parameter2'); }
 
-    openDialog(): void {
-        const dialogref = this.dialog.open(ConfirmacionDialogoComponent, {
-            width: '270px',
-            //data: "Se limpiará el resultado de la consulta, ¿ desea continuar ?",
-            
-        });
-
-        dialogref.afterClosed().subscribe(result => {
-            this.onReset();
-        });
-    }
 
     ngOnInit() {
 

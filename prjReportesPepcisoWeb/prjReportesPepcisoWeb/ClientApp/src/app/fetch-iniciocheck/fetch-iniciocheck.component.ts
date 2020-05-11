@@ -4,7 +4,7 @@ import { ChecklistazulService } from '../services/checklistazul.service';
 import { Checklistazul } from '../../models/checklistazul';
 import { ExporterService } from '../services/exporter.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
-import { ConfirmacionDialogoComponent } from '../confirmacion-dialogo/confirmacion-dialogo.component';
+//import { ConfirmacionDialogoComponent } from '../confirmacion-dialogo/confirmacion-dialogo.component';
 
 @Component({
   selector: 'app-fetch-iniciocheck',
@@ -25,17 +25,17 @@ export class FetchInicioCheckComponent implements OnInit {
   title = 'angulardatatables';
     dtOptions: DataTables.Settings = {};
 
-    openDialog(): void {
-        const dialogref = this.dialog.open(ConfirmacionDialogoComponent, {
-            width: '250px',
-            data: "Se limpiará el resultado de la consulta, ¿ desea continuar ?",
+    //openDialog(): void {
+    //    const dialogref = this.dialog.open(ConfirmacionDialogoComponent, {
+    //        width: '250px',
+    //        data: "Se limpiará el resultado de la consulta, ¿ desea continuar ?",
 
-        });
+    //    });
 
-        dialogref.afterClosed().subscribe(result => {
-            this.onReset();
-        });
-    }
+    //    dialogref.afterClosed().subscribe(result => {
+    //        this.onReset();
+    //    });
+    //}
 
   ngOnInit() {
 
