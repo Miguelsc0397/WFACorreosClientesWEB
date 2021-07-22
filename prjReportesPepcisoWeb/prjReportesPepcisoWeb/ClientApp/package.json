@@ -55,7 +55,7 @@
     "perfect-scrollbar": "1.4.0",
     "rxjs": "6.4.0",
     "rxjs-compat": "6.4.0",
-    "xlsx": "^0.15.5",
+    "xlsx": "^0.17.0",
     "zone.js": "0.9.0"
   },
   "devDependencies": {
